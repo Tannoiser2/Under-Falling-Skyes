@@ -159,7 +159,7 @@ func aabb_cielo() -> AABB:
 	return AABB(Vector3(-LARGO / 2 - 0.4, 0, top), Vector3(LARGO + 2.2, 0.5, z_citta + ALTO_CITTA - top))
 
 func aabb_base() -> AABB:
-	return AABB(Vector3(-LARGO / 2 - 0.2, 0, z_base + 0.3), Vector3(LARGO + 0.4, 0.5, MEZZA_BASE * 2 - 0.2))
+	return AABB(Vector3(-LARGO / 2 - 0.1, 0, z_base - 0.15), Vector3(LARGO + 0.2, 0.5, MEZZA_BASE * 2 + 0.3))
 
 func aabb_tutto() -> AABB:
 	return AABB(Vector3(-LARGO / 2, 0, -MADRE_H + 2), Vector3(LARGO, 0.5, z_base + MEZZA_BASE * 2 + MADRE_H - 2))

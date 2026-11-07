@@ -45,10 +45,6 @@ var lbl_codice: Label
 var dado_sel := -1
 var selezione := {}
 var storia: Array = []
-var libero: Control
-var cam_libera: Camera3D
-var orbita := Vector3(0.0, -55.0, 34.0)   # yaw, pitch, distanza
-var centro_libero := Vector3.ZERO
 var trascina := ""
 var finestra: Control
 
@@ -745,7 +741,7 @@ func schermo_gioco() -> void:
 	sc.add_child(radice)
 	# --- pannello sinistro
 	var sin := PanelContainer.new()
-	sin.custom_minimum_size = Vector2(300, 0)
+	sin.custom_minimum_size = Vector2(350, 0)
 	radice.add_child(sin)
 	var ssc := ScrollContainer.new()
 	ssc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -758,7 +754,7 @@ func schermo_gioco() -> void:
 	lbl_stato = _rich("", 17)
 	vs.add_child(lbl_stato)
 	var ct := Motore.citta(m.citta_id())
-	var img_c := _immagine("res://assets/citta/%s%s.webp" % [m.citta_id(), "_d" if m.danneggiata() else ""], 276)
+	var img_c := _immagine("res://assets/citta/%s%s.webp" % [m.citta_id(), "_d" if m.danneggiata() else ""], 326)
 	img_c.mouse_filter = Control.MOUSE_FILTER_STOP
 	img_c.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed: _mostra_citta())
 	img_c.tooltip_text = ct["testo_d"] if m.danneggiata() else ct["testo"]
@@ -769,7 +765,6 @@ func schermo_gioco() -> void:
 	vs.add_child(box_pers)
 	var hb := HBoxContainer.new()
 	hb.add_child(_btn("Regole", _mostra_regole, 16))
-	hb.add_child(_btn("Vista 3D", _apri_libera, 16))
 	hb.add_child(_btn("Menu", _esci, 16))
 	vs.add_child(hb)
 	lbl_codice = _lbl("Codice: %s" % codice, 14, C_TENUE)
@@ -856,20 +851,23 @@ func _inquadra(anim := true) -> void:
 	_imposta_cam(cam_cielo, tav.aabb_cielo(), sv_cielo.size, zoom["cielo"], spost["cielo"], 72.0, anim)
 	_imposta_cam(cam_base, tav.aabb_base(), sv_base.size, zoom["base"], spost["base"], 68.0, anim)
 
-func _imposta_cam(cam: Camera3D, box: AABB, vp: Vector2i, z: float, sp: Vector3, pitch: float, anim: bool) -> void:
+## Vista dall'alto, senza prospettiva: il tabellone appare dritto come sul tavolo.
+func _imposta_cam(cam: Camera3D, box: AABB, vp: Vector2i, z: float, sp: Vector3, _pitch: float, anim: bool) -> void:
 	var asp := float(max(vp.x, 1)) / float(max(vp.y, 1))
-	var fv := deg_to_rad(cam.fov)
-	var fh := 2.0 * atan(tan(fv / 2.0) * asp)
+	cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+	cam.keep_aspect = Camera3D.KEEP_HEIGHT
+	cam.near = 0.5
+	cam.far = 200.0
+	var dim: float = max(box.size.z, box.size.x / asp) * 1.02 / z
 	var cen := box.get_center() + sp
-	var d: float = max((box.size.z * 0.5 * sin(deg_to_rad(pitch))) / tan(fv / 2.0), (box.size.x * 0.5) / tan(fh / 2.0)) * 1.04 / z
-	var dir := Vector3(0, sin(deg_to_rad(pitch)), cos(deg_to_rad(pitch)))
-	var pos := cen + dir * d
-	var xf := Transform3D(Basis(), pos).looking_at(cen, Vector3.UP)
+	var xf := Transform3D(Basis.from_euler(Vector3(-PI / 2, 0, 0)), Vector3(cen.x, 60.0, cen.z))
 	if anim:
-		var tw := create_tween()
-		tw.tween_property(cam, "global_transform", xf, 0.5)
+		var tw := create_tween().set_parallel()
+		tw.tween_property(cam, "global_transform", xf, 0.4)
+		tw.tween_property(cam, "size", dim, 0.4)
 	else:
 		cam.global_transform = xf
+		cam.size = dim
 
 func _raggio(e: InputEvent, cam: Camera3D, cont: Control) -> Vector3:
 	var p: Vector2 = e.position
@@ -903,7 +901,8 @@ func _input_vista(e: InputEvent, quale: String, cont: Control) -> void:
 				_click_cella(cella, e.global_position)
 	elif e is InputEventMouseMotion:
 		if trascina == quale:
-			var k: float = 0.04 / zoom[quale]
+			var cam_q: Camera3D = cam_cielo if quale == "cielo" else cam_base
+			var k: float = cam_q.size / max(1.0, cont.size.y)
 			spost[quale] += Vector3(-e.relative.x * k, 0, -e.relative.y * k)
 			_inquadra(false)
 		else:
@@ -1149,19 +1148,27 @@ func _personaggi() -> void:
 		var p: Dictionary = m.s["personaggi"][i]
 		var pe := Motore.personaggio(p["id"])
 		var h := HBoxContainer.new()
-		var img := _immagine("res://assets/personaggi/%s%s.webp" % [p["id"], "_p" if p["promosso"] else ""], 70)
+		var img := _immagine("res://assets/personaggi/%s%s.webp" % [p["id"], "_p" if p["promosso"] else ""], 150)
 		img.mouse_filter = Control.MOUSE_FILTER_STOP
+		img.tooltip_text = "Clicca per ingrandire"
 		var idx: int = i
 		img.gui_input.connect(func(e): if e is InputEventMouseButton and e.pressed: _mostra_personaggio(idx))
 		h.add_child(img)
 		var v := VBoxContainer.new()
 		v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		v.add_child(_lbl(pe["nome"], 16, C_ORO, font_grassetto))
-		v.add_child(_lbl(pe["ruolo_p"] if p["promosso"] else pe["ruolo"], 13, C_TENUE))
-		var b := _btn("Usata" if p["usato"] else "Usa", func(): _usa_personaggio(idx), 15)
+		v.custom_minimum_size = Vector2(170, 0)
+		var nome := _lbl(pe["nome"], 17, C_ORO, font_grassetto)
+		nome.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		v.add_child(nome)
+		v.add_child(_lbl(pe["ruolo_p"] if p["promosso"] else pe["ruolo"], 14, C_TENUE))
+		var testo := _lbl(pe["testo_p"] if p["promosso"] else pe["testo"], 13, C_TESTO)
+		testo.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		testo.custom_minimum_size.x = 160
+		v.add_child(testo)
+		var b := _btn("Usata" if p["usato"] else "Usa", func(): _usa_personaggio(idx), 16)
 		var perche := m.puo_usare(i)
 		b.disabled = perche != "" or not selezione.is_empty()
-		b.tooltip_text = (pe["testo_p"] if p["promosso"] else pe["testo"]) + ("\n\n" + perche if perche != "" and not p["usato"] else "")
+		b.tooltip_text = perche if perche != "" and not p["usato"] else ""
 		v.add_child(b)
 		h.add_child(v)
 		box_pers.add_child(h)
@@ -1795,67 +1802,6 @@ func _dialogo_dadi(i: int, pr: bool, esegui: Callable) -> void:
 					vals[k] = int(spin[k].value)
 			o["valori"] = vals
 		esegui.call(o)], ["Annulla", func(): pass]])
-
-# ---------------------------------------------------------------- vista 3D libera
-
-func _apri_libera() -> void:
-	libero = Control.new()
-	libero.set_anchors_preset(Control.PRESET_FULL_RECT)
-	schermo.add_child(libero)
-	var cont := SubViewportContainer.new()
-	cont.stretch = true
-	cont.set_anchors_preset(Control.PRESET_FULL_RECT)
-	libero.add_child(cont)
-	var sv := SubViewport.new()
-	sv.msaa_3d = Viewport.MSAA_4X
-	sv.world_3d = sv_cielo.find_world_3d()
-	cont.add_child(sv)
-	cam_libera = Camera3D.new()
-	cam_libera.fov = 45
-	sv.add_child(cam_libera)
-	centro_libero = tav.aabb_tutto().get_center()
-	orbita = Vector3(20.0, -48.0, 40.0)
-	_aggiorna_orbita()
-	cont.gui_input.connect(_input_libero)
-	var b := _btn("Chiudi la vista 3D", func():
-		libero.queue_free()
-		libero = null, 18)
-	b.position = Vector2(20, 20)
-	libero.add_child(b)
-	var l := _lbl("Trascina per ruotare · rotella per lo zoom · tasto destro per spostare", 16, C_TENUE)
-	l.position = Vector2(20, 70)
-	libero.add_child(l)
-
-func _aggiorna_orbita() -> void:
-	var yaw := deg_to_rad(orbita.x)
-	var pitch := deg_to_rad(orbita.y)
-	var off := Vector3(sin(yaw) * cos(pitch), -sin(pitch), cos(yaw) * cos(pitch)) * orbita.z
-	cam_libera.global_transform = Transform3D(Basis(), centro_libero + off).looking_at(centro_libero, Vector3.UP)
-
-func _input_libero(e: InputEvent) -> void:
-	if e is InputEventMouseButton:
-		if e.button_index == MOUSE_BUTTON_WHEEL_UP and e.pressed:
-			orbita.z = max(6.0, orbita.z * 0.9)
-		elif e.button_index == MOUSE_BUTTON_WHEEL_DOWN and e.pressed:
-			orbita.z = min(90.0, orbita.z * 1.1)
-		elif e.button_index == MOUSE_BUTTON_LEFT:
-			trascina = "ruota" if e.pressed else ""
-		elif e.button_index == MOUSE_BUTTON_RIGHT:
-			trascina = "sposta" if e.pressed else ""
-		_aggiorna_orbita()
-	elif e is InputEventMouseMotion:
-		if trascina == "ruota":
-			orbita.x -= e.relative.x * 0.3
-			orbita.y = clamp(orbita.y - e.relative.y * 0.3, -88.0, -8.0)
-		elif trascina == "sposta":
-			var yaw := deg_to_rad(orbita.x)
-			var dx := Vector3(cos(yaw), 0, -sin(yaw))
-			var dz := Vector3(sin(yaw), 0, cos(yaw))
-			centro_libero += (-dx * e.relative.x - dz * e.relative.y) * orbita.z * 0.002
-		_aggiorna_orbita()
-	elif e is InputEventMagnifyGesture:
-		orbita.z = clamp(orbita.z / e.factor, 6.0, 90.0)
-		_aggiorna_orbita()
 
 # ---------------------------------------------------------------- fine partita
 

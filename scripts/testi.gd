@@ -41,4 +41,4 @@ Il livello di minaccia è il numero di tessere cielo girate sul lato più minacc
 Quattro capitoli, di solito una decina di partite. In ogni battaglia scegli fra due pile casuali (città, scenario, personaggio). Se perdi la prima partita ne giochi una seconda sul lato danneggiato della città. I personaggi che combattono con te tornano promossi nei capitoli successivi. Il punteggio finale è la somma dei livelli di minaccia delle partite vinte, meno 1 per ogni sconfitta.
 
 [font_size=26][b]Comandi[/b][/font_size]
-Rotella: zoom. Tasto destro trascinato: sposta la vista. Il pulsante [b]Vista 3D[/b] apre il tabellone intero da far ruotare con il mouse. [b]Annulla[/b] torna indietro all'ultima mossa, ma non dopo un lancio di dadi."""
+A sinistra il cielo, a destra il laboratorio (la base). Rotella: zoom. Tasto destro trascinato: sposta la vista. Doppio clic: torna alla vista intera. [b]Annulla[/b] torna indietro all'ultima mossa, ma non dopo un lancio di dadi."""

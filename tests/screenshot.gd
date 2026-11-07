@@ -40,8 +40,8 @@ func _process(_d: float) -> bool:
 		main.aggiorna(false)
 	if n == 70: _scatta("turno4")
 	if n == 72:
-		main._apri_libera()
-	if n == 90: _scatta("libera")
+		main._mostra_personaggio(0)
+	if n == 90: _scatta("personaggio")
 	if n == 92:
 		main.schermo_singola()
 	if n == 100: _scatta("singola")
