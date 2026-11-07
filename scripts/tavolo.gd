@@ -26,6 +26,7 @@ var segn_danni: Node3D
 var gettoni: Node3D
 var luci: Node3D
 var evid: Node3D
+var ombre: Node3D
 var tex_cache := {}
 var scena_nave := {}
 var font: FontFile
@@ -253,6 +254,8 @@ func costruisci(motore: Motore) -> void:
 	add_child(gettoni)
 	evid = Node3D.new()
 	add_child(evid)
+	ombre = Node3D.new()
+	add_child(ombre)
 	_luci()
 	aggiorna(false)
 
@@ -527,3 +530,84 @@ func eventi(lista: Array) -> void:
 				esplosione(pos_cielo(e["pos"][0], e["pos"][1]))
 			"colpo":
 				lampo_citta()
+
+# ---------------------------------------------------------------- anteprima di un piazzamento
+
+func pulisci_anteprima() -> void:
+	if ombre == null:
+		return
+	for ch in ombre.get_children():
+		ch.queue_free()
+
+func _trasparente(col: Color, a: float, emiss := 1.0) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(col.r, col.g, col.b, a)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = emiss
+	return mat
+
+func _ombra_box(dim: Vector3, pos: Vector3, col: Color, a: float) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var b := BoxMesh.new()
+	b.size = dim
+	mi.mesh = b
+	mi.material_override = _trasparente(col, a)
+	mi.position = pos
+	ombre.add_child(mi)
+	strato(mi, STRATO_CIELO)
+	return mi
+
+func _anello(pos: Vector3, r: float, col: Color) -> void:
+	var mi := MeshInstance3D.new()
+	var t := TorusMesh.new()
+	t.inner_radius = r * 0.8
+	t.outer_radius = r
+	t.rings = 32
+	mi.mesh = t
+	mi.material_override = _trasparente(col, 0.95, 2.0)
+	mi.position = pos + Vector3(0, 0.7, 0)
+	ombre.add_child(mi)
+	strato(mi, STRATO_CIELO)
+
+const COL_NAVE := {"viola": Color(0.95, 0.15, 0.55), "bianca": Color(0.9, 0.92, 1.0), "arancione": Color(1.0, 0.5, 0.1)}
+
+## Disegna le navi fantasma nelle nuove posizioni, la scia della discesa, i colpi alla città,
+## la nuova quota della nave madre e un anello rosso sulle navi che i caccia abbatterebbero.
+func mostra_anteprima(prima: Motore, dopo: Motore, abbattute: Array) -> void:
+	pulisci_anteprima()
+	for n in prima.navi_cielo():
+		var n2 := dopo.nave(n["id"])
+		var col: Color = COL_NAVE.get(n["col"], Color.WHITE)
+		var da := pos_cielo(int(n["r"]), int(n["c"]))
+		if n2["st"] == "cielo":
+			if int(n2["r"]) == int(n["r"]) and int(n2["c"]) == int(n["c"]):
+				continue
+			var a := pos_cielo(int(n2["r"]), int(n2["c"]))
+			_scia(da, a, col)
+			var g := _ombra_box(Vector3(1.0, 0.08, 0.9), a + Vector3(0, 0.12, 0), col, 0.55)
+			g.rotation_degrees.y = 45
+		else:
+			# colpisce la città o torna sulla nave madre
+			var colpo: bool = int(dopo.s["danni"]) > int(prima.s["danni"]) and n2["st"] == "madre"
+			var fine := Vector3(da.x, 0, z_citta + 0.8) if colpo else Vector3(da.x, 0, RIGA * (int(dopo.s["M"]) + 1) - 1.0)
+			_scia(da, fine, Color(1, 0.15, 0.2) if colpo else col)
+	if int(dopo.s["danni"]) > int(prima.s["danni"]):
+		_ombra_box(Vector3(LARGO, 0.05, ALTO_CITTA), Vector3(0, 0.1, z_citta + ALTO_CITTA / 2), Color(1, 0.1, 0.2), 0.35)
+	if int(dopo.s["M"]) > int(prima.s["M"]):
+		var zm := RIGA * (int(dopo.s["M"]) + 1)
+		_ombra_box(Vector3(LARGO, 0.06, RIGA * (int(dopo.s["M"]) - int(prima.s["M"]))), Vector3(0, 0.15, zm - RIGA * (int(dopo.s["M"]) - int(prima.s["M"])) / 2.0), Color(0.95, 0.3, 0.1), 0.45)
+	for id in abbattute:
+		var n2 := dopo.nave(id)
+		if n2.get("st", "") == "cielo":
+			_anello(pos_cielo(int(n2["r"]), int(n2["c"])), 0.75, Color(1, 0.1, 0.15))
+
+func _scia(da: Vector3, a: Vector3, col: Color) -> void:
+	var dir := a - da
+	var lung := dir.length()
+	if lung < 0.05:
+		return
+	var mi := _ombra_box(Vector3(0.18, 0.04, lung), (da + a) / 2.0 + Vector3(0, 0.08, 0), col, 0.5)
+	mi.rotation.y = atan2(dir.x, dir.z)

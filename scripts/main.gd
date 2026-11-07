@@ -933,8 +933,13 @@ func _hover(cella: Dictionary, quale: String) -> void:
 	var t := ""
 	if cella.get("zona", "") == "base" and m.s["fase"] == "dadi" and dado_sel >= 0:
 		var perche := m.perche_no(dado_sel, cella["r"], cella["c"])
-		lbl_hover.text = perche if perche != "" else _valuta_cella(dado_sel, cella["r"], cella["c"])["testo"]
+		if perche != "":
+			_togli_anteprima()
+			lbl_hover.text = perche
+		else:
+			lbl_hover.text = _anteprima(dado_sel, cella["r"], cella["c"])
 		return
+	_togli_anteprima()
 	if cella.get("zona", "") == "base":
 		var r: int = cella["r"]
 		var c: int = cella["c"]
@@ -959,6 +964,96 @@ func _hover(cella: Dictionary, quale: String) -> void:
 			if not n.is_empty():
 				t = "Nave %s · %s" % [n["col"], t]
 	lbl_hover.text = t if t != "" else SUGG_VUOTO
+
+var _chiave_anteprima := ""
+var _testo_anteprima := ""
+
+func _togli_anteprima() -> void:
+	_chiave_anteprima = ""
+	if tav != null:
+		tav.pulisci_anteprima()
+
+## Simula il piazzamento su una copia del motore e mostra cosa succederebbe:
+## navi che scendono, colpi alla città, nave madre, effetto della stanza.
+func _anteprima(id: int, r: int, c: int) -> String:
+	var chiave := "%d,%d,%d,%d" % [id, r, c, m.s.get("tiri", 0)]
+	if chiave == _chiave_anteprima:
+		return _testo_anteprima
+	_chiave_anteprima = chiave
+	var prova := Motore.new()
+	prova.carica(JSON.parse_string(JSON.stringify(m.s)))
+	var d := m.dado(id)
+	var bianco: bool = d["col"] == "bianco" and m.dadi_in_mano().size() > 1
+	var pech := 0
+	if d.get("fisso", false) and not m.valori_pechino().is_empty():
+		pech = m.valori_pechino().max()
+	prova.piazza(id, r, c, pech)
+	var righe: Array = []
+	var colpi := 0
+	var madre := 0
+	for e in prova.eventi:
+		match e["t"]:
+			"colpo":
+				colpi += 1
+			"madre":
+				madre += 1
+	var scese := 0
+	for n in m.navi_cielo():
+		var n2 := prova.nave(n["id"])
+		if n2["st"] == "cielo" and (int(n2["r"]) != int(n["r"]) or int(n2["c"]) != int(n["c"])):
+			scese += 1
+	if scese > 0:
+		righe.append("%d nav%s si spost%s." % [scese, "e" if scese == 1 else "i", "a" if scese == 1 else "ano"])
+	elif colpi == 0:
+		righe.append("Nessuna nave si muove.")
+	if colpi > 0:
+		righe.append("ATTENZIONE: %d nav%s colpisc%s la città: danni %d → %d." % [colpi, "e" if colpi == 1 else "i", "e" if colpi == 1 else "ono", m.s["danni"], prova.s["danni"]])
+	if madre > 0:
+		righe.append("Una nave finisce sulla nave madre: la nave madre scende di %d rig%s." % [madre, "a" if madre == 1 else "he"])
+	if prova.finita():
+		righe.append("La partita finirebbe: %s" % prova.s["motivo"])
+	# effetto previsto della stanza nella Fase delle Stanze
+	var abbattute: Array = []
+	var i := prova.stanza_di(r, c)
+	if not prova.scavata(r, c) and i >= -1:
+		var dist := prova.indice_percorso(r, c) - int(m.s["esc"])
+		righe.append("Stanze: pagando 1 energia l'escavatore avanzerà di %d spazi." % dist)
+	elif i >= 0 and not prova.effetti(i).is_empty():
+		var st: Dictionary = prova.s["stanze"][i]
+		if not prova.stanza_piena(i):
+			righe.append("Stanze: la stanza funziona solo se riempi anche gli altri spazi.")
+		else:
+			var en: int = int(prova.s["energia"])
+			if int(st["costo"]) > en and not "energia" in st["t"]:
+				righe.append("Stanze: costa %d energia, ne hai %d." % [st["costo"], en])
+			for t in prova.effetti(i):
+				var v := prova.valore_effetto(i, t)
+				match t:
+					"energia":
+						var k: int = min(v, int(prova.s["energia_max"]) - en)
+						righe.append("Stanze: energia %d → %d." % [en, en + max(0, k)])
+					"ricerca":
+						var p := prova.passi_ricerca(v)
+						righe.append("Stanze: ricerca %d → %d%s." % [prova.s["ricerca"], int(prova.s["ricerca"]) + p, "" if p > 0 else " (il valore %d non basta)" % v])
+					"caccia":
+						var bers := prova.bersagli_caccia(v, false)
+						var rosse := prova.bersagli_caccia(v, true)
+						if rosse.size() > bers.size():
+							bers = rosse
+						for n in bers:
+							abbattute.append(n["id"])
+						righe.append("Stanze: i caccia (valore %d) abbattono %d nav%s." % [v, bers.size(), "e" if bers.size() == 1 else "i"])
+					"robot":
+						righe.append("Stanze: assembli un robot di valore %d." % clamp(v, 1, 6))
+					"comando":
+						righe.append("Stanze: distribuisci %d punti fra gli altri dadi." % v)
+	elif i < 0:
+		righe.append("Stanze: cunicolo, il dado non avrà effetto.")
+	if bianco:
+		righe.append("Dado bianco: poi rilanci i dadi rimasti.")
+	tav.mostra_anteprima(m, prova, abbattute)
+	_testo_anteprima = " ".join(righe)
+	return _testo_anteprima
 
 ## Cosa produrrà un dado piazzato in questa cella: utile, scavo, dubbia (forse inutile) o inutile.
 func _valuta_cella(id: int, r: int, c: int) -> Dictionary:
@@ -1077,6 +1172,7 @@ func _desc_azione(az: String) -> String:
 func aggiorna(anim := true) -> void:
 	if m == null or tav == null:
 		return
+	_togli_anteprima()
 	if anim:
 		tav.eventi(m.eventi)
 	m.eventi.clear()
@@ -1642,7 +1738,9 @@ func _finestra(titolo: String, contenuto: Control, bottoni: Array) -> void:
 	cc.set_anchors_preset(Control.PRESET_FULL_RECT)
 	velo.add_child(cc)
 	var pan := PanelContainer.new()
-	pan.custom_minimum_size = Vector2(560, 0)
+	var vis := get_viewport_rect().size
+	var larg: float = clamp(max(560.0, contenuto.custom_minimum_size.x + 60.0), 560.0, vis.x - 60.0)
+	pan.custom_minimum_size = Vector2(larg, 0)
 	cc.add_child(pan)
 	var mg := MarginContainer.new()
 	for k in ["left", "right", "top", "bottom"]:
@@ -1653,7 +1751,11 @@ func _finestra(titolo: String, contenuto: Control, bottoni: Array) -> void:
 	mg.add_child(v)
 	v.add_child(_titolo(titolo, 30))
 	var scr := ScrollContainer.new()
-	scr.custom_minimum_size = Vector2(0, min(620, max(80, contenuto.get_combined_minimum_size().y + 20)))
+	var alto_max: float = vis.y - 200.0
+	if contenuto.has_meta("alto"):
+		scr.custom_minimum_size = Vector2(larg - 40.0, alto_max)
+	else:
+		scr.custom_minimum_size = Vector2(larg - 40.0, min(alto_max, max(80, contenuto.get_combined_minimum_size().y + 20)))
 	scr.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	contenuto.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scr.add_child(contenuto)
@@ -1673,8 +1775,9 @@ func _finestra(titolo: String, contenuto: Control, bottoni: Array) -> void:
 			finestra = null, 18))
 
 func _mostra_regole() -> void:
-	var r := _rich(Testi.REGOLE, 17)
-	r.custom_minimum_size = Vector2(820, 0)
+	var r := _rich(Testi.REGOLE, 18)
+	r.custom_minimum_size = Vector2(min(1100.0, get_viewport_rect().size.x - 120.0), 0)
+	r.set_meta("alto", true)
 	_finestra("Regole in breve", r, [])
 
 func _mostra_citta() -> void:

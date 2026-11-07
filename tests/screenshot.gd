@@ -31,7 +31,17 @@ func _process(_d: float) -> bool:
 			main.m.piazza(mv[0], mv[1], mv[2])
 		main.dado_sel = main.m.dadi_in_mano()[0]["id"]
 		main.aggiorna(false)
-	if n == 48: main._hover({"zona": "base", "r": 1, "c": 2}, "base")
+	if n == 46:
+		var best := []
+		var bv := -1
+		for cc in main.m.celle_legali(main.dado_sel):
+			var pr := Motore.new()
+			pr.carica(JSON.parse_string(JSON.stringify(main.m.s)))
+			pr.piazza(main.dado_sel, cc[0], cc[1])
+			if pr.eventi.size() > bv and main.m.scavata(cc[0], cc[1]):
+				bv = pr.eventi.size()
+				best = cc
+		main._hover({"zona": "base", "r": best[0], "c": best[1]}, "base")
 	if n == 50: _scatta("piazzati")
 	if n == 52:
 		var ia := IA.new(main.m)
@@ -41,8 +51,8 @@ func _process(_d: float) -> bool:
 		main.aggiorna(false)
 	if n == 70: _scatta("turno4")
 	if n == 72:
-		main._mostra_personaggio(0)
-	if n == 90: _scatta("personaggio")
+		main._mostra_regole()
+	if n == 90: _scatta("regole")
 	if n == 92:
 		main.schermo_singola()
 	if n == 100: _scatta("singola")
