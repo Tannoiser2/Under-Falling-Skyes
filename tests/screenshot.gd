@@ -7,7 +7,7 @@ var n := 0
 func _initialize() -> void:
 	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
-	root.size = Vector2i(1440, 900)
+	root.size = Vector2i(int(OS.get_environment("W")) if OS.get_environment("W") != "" else 1440, int(OS.get_environment("H")) if OS.get_environment("H") != "" else 900)
 
 func _scatta(nome: String) -> void:
 	var img := root.get_texture().get_image()

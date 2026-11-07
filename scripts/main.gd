@@ -791,6 +791,7 @@ func schermo_gioco() -> void:
 	tav.costruisci(m)
 	cam_cielo = Camera3D.new()
 	cam_cielo.fov = 42
+	cam_cielo.cull_mask = Tavolo.STRATO_CIELO
 	sv_cielo.add_child(cam_cielo)
 	cont_cielo.gui_input.connect(func(e): _input_vista(e, "cielo", cont_cielo))
 	# --- colonna destra
@@ -813,6 +814,7 @@ func schermo_gioco() -> void:
 	cont_base.add_child(sv_base)
 	cam_base = Camera3D.new()
 	cam_base.fov = 40
+	cam_base.cull_mask = Tavolo.STRATO_BASE
 	sv_base.add_child(cam_base)
 	cont_base.gui_input.connect(func(e): _input_vista(e, "base", cont_base))
 	lbl_hover = _lbl("", 16, C_TESTO)

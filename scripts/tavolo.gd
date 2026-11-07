@@ -35,6 +35,23 @@ func _tex(path: String) -> Texture2D:
 		tex_cache[path] = load(path)
 	return tex_cache[path]
 
+## Livelli di visibilità: 1 = cielo, 2 = base, 3 = entrambi. Ogni inquadratura vede solo la sua parte
+## del tabellone, così la base non compare anche sotto il cielo (e viceversa).
+const STRATO_CIELO := 1
+const STRATO_BASE := 2
+const STRATO_TUTTI := 3
+
+func strato(n: Node, l: int) -> void:
+	if n is VisualInstance3D:
+		(n as VisualInstance3D).layers = l
+	for ch in n.get_children():
+		strato(ch, l)
+
+func _strato_z(z: float) -> int:
+	if z >= z_base - 0.3:
+		return STRATO_BASE
+	return STRATO_CIELO
+
 func _piano(tex: Texture2D, w: float, h: float, pos: Vector3, alza := 0.0, sbiad := false) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	var q := PlaneMesh.new()
@@ -139,10 +156,10 @@ func z_madre() -> float:
 
 func aabb_cielo() -> AABB:
 	var top := z_madre() - 3.2
-	return AABB(Vector3(-LARGO / 2 - 0.3, 0, top), Vector3(LARGO + 0.6, 0.5, z_citta + ALTO_CITTA - top))
+	return AABB(Vector3(-LARGO / 2 - 0.4, 0, top), Vector3(LARGO + 2.2, 0.5, z_citta + ALTO_CITTA - top))
 
 func aabb_base() -> AABB:
-	return AABB(Vector3(-LARGO / 2 - 0.2, 0, z_base - 0.2), Vector3(LARGO + 0.4, 0.5, MEZZA_BASE * 2 + 0.4))
+	return AABB(Vector3(-LARGO / 2 - 0.2, 0, z_base + 0.3), Vector3(LARGO + 0.4, 0.5, MEZZA_BASE * 2 - 0.2))
 
 func aabb_tutto() -> AABB:
 	return AABB(Vector3(-LARGO / 2, 0, -MADRE_H + 2), Vector3(LARGO, 0.5, z_base + MEZZA_BASE * 2 + MADRE_H - 2))
@@ -185,35 +202,41 @@ func costruisci(motore: Motore) -> void:
 	var t := _piano(_tex("res://assets/ui/tavolo.webp"), 80, 80, Vector3(0, -0.05, 12))
 	(t.material_override as StandardMaterial3D).uv1_scale = Vector3(3, 3, 1)
 	(t.material_override as StandardMaterial3D).albedo_color = Color(0.55, 0.55, 0.6)
+	strato(t, STRATO_TUTTI)
 	# cielo
 	var z := 0.0
 	if cfg.get("satellite", false):
-		_piano(_tex("res://assets/tessere/satellite.webp"), LARGO, RIGA * 2, Vector3(0, 0, RIGA))
+		strato(_piano(_tex("res://assets/tessere/satellite.webp"), LARGO, RIGA * 2, Vector3(0, 0, RIGA)), STRATO_CIELO)
 		z = RIGA * 2
 	for ti in cfg["cielo"]:
 		var img: String = D["cielo"][ti["t"]][int(ti["lato"])]["img"]
-		_piano(_tex("res://assets/tessere/%s.webp" % img), LARGO, MEZZA_BASE, Vector3(0, 0, z + MEZZA_BASE / 2))
+		strato(_piano(_tex("res://assets/tessere/%s.webp" % img), LARGO, MEZZA_BASE, Vector3(0, 0, z + MEZZA_BASE / 2)), STRATO_CIELO)
 		z += MEZZA_BASE
 	z_citta = z
 	var nome_c: String = cfg["citta"] + ("_d" if cfg.get("danneggiata", false) else "")
-	_piano(_tex("res://assets/citta/%s.webp" % nome_c), LARGO, ALTO_CITTA, Vector3(0, 0, z + ALTO_CITTA / 2))
+	strato(_piano(_tex("res://assets/citta/%s.webp" % nome_c), LARGO, ALTO_CITTA, Vector3(0, 0, z + ALTO_CITTA / 2)), STRATO_CIELO)
 	z_base = z + ALTO_CITTA + 0.12
 	var ct := Motore.citta(cfg["citta"])
-	_piano(_tex("res://assets/tessere/base_%s_su.webp" % ct["su"]), LARGO, MEZZA_BASE, Vector3(0, 0, z_base + MEZZA_BASE / 2))
-	_piano(_tex("res://assets/tessere/base_%s_giu.webp" % ct["giu"]), LARGO, MEZZA_BASE, Vector3(0, 0, z_base + MEZZA_BASE * 1.5))
+	strato(_piano(_tex("res://assets/tessere/base_%s_su.webp" % ct["su"]), LARGO, MEZZA_BASE, Vector3(0, 0, z_base + MEZZA_BASE / 2)), STRATO_BASE)
+	strato(_piano(_tex("res://assets/tessere/base_%s_giu.webp" % ct["giu"]), LARGO, MEZZA_BASE, Vector3(0, 0, z_base + MEZZA_BASE * 1.5)), STRATO_BASE)
 	# nave madre (tessera originale)
 	nodo_madre = _piano(_tex("res://assets/tessere/nave_madre.webp"), MADRE_W, MADRE_H, Vector3.ZERO, 0.03)
 	nodo_madre.position = Vector3(0, 0.03, z_madre() - MADRE_H / 2)
+	strato(nodo_madre, STRATO_CIELO)
 	# segnalini dei tracciati
 	segn_ricerca = _cilindro(0.3, 0.18, Color(0.35, 0.95, 0.3), 0.6)
 	add_child(segn_ricerca)
+	strato(segn_ricerca, STRATO_CIELO)
 	segn_energia = _cilindro(0.3, 0.18, Color(1.0, 0.85, 0.1), 0.6)
 	add_child(segn_energia)
+	strato(segn_energia, STRATO_BASE)
 	segn_danni = _box(Vector3(0.5, 0.2, 0.5), Color(0.95, 0.15, 0.3), Vector3.ZERO, 0.5)
 	add_child(segn_danni)
+	strato(segn_danni, STRATO_BASE)
 	nodo_esc = load("res://assets/modelli/escavatore.glb").instantiate()
 	nodo_esc.scale = Vector3.ONE * 1.25
 	add_child(nodo_esc)
+	strato(nodo_esc, STRATO_BASE)
 	gettoni = Node3D.new()
 	add_child(gettoni)
 	evid = Node3D.new()
@@ -274,7 +297,7 @@ func _pos_nave(n: Dictionary, i_attesa: int, i_riserva: int, totale_attesa: int)
 			var x0 := -w * (totale_attesa - 1) / 2.0
 			return Vector3(x0 + w * i_attesa, 0.45, z_madre() - 2.3)
 		"riserva":
-			return Vector3(5.75, 0.3, 0.8 + i_riserva * 1.2)
+			return Vector3(5.55, 0.3, z_madre() - 3.0 + i_riserva * 1.0)
 		"fuori":
 			return Vector3(-5.8, 0.3, z_riga(int(n.get("fuori_riga", 0))))
 	return Vector3.ZERO
@@ -290,6 +313,7 @@ func _aggiorna_navi(anim: bool) -> void:
 			nodo = scena_nave["nave_" + n["col"]].instantiate()
 			nodo.scale = Vector3.ONE * 1.15
 			add_child(nodo)
+			strato(nodo, STRATO_CIELO)
 			nodi_navi[id] = nodo
 			nodo.position = _pos_nave(n, 0, 0, 1)
 			anim = anim
@@ -344,6 +368,7 @@ func _nodo_dado(col: String) -> Node3D:
 	faccia.name = "faccia"
 	n.add_child(faccia)
 	add_child(n)
+	strato(n, STRATO_BASE)
 	return n
 
 func _aggiorna_dadi(anim: bool) -> void:
@@ -381,10 +406,12 @@ func _gettone(pos: Vector3, testo: String, col: Color, dim := 0.32) -> void:
 	var g := _cilindro(dim, 0.1, col, 0.4)
 	g.position = pos + Vector3(0, 0.06, 0)
 	gettoni.add_child(g)
+	strato(g, _strato_z(pos.z))
 	if testo != "":
 		var l := _etichetta(testo, 56)
 		l.position = pos + Vector3(0, 0.13, 0)
 		gettoni.add_child(l)
+		strato(l, _strato_z(pos.z))
 
 func _aggiorna_gettoni() -> void:
 	for ch in gettoni.get_children():
@@ -431,12 +458,14 @@ func evidenzia_base(celle: Array, col: Color) -> void:
 		var b := _box(Vector3(1.25, 0.04, 1.55), Color(col.r, col.g, col.b, 0.3), pos_base(cc[0], cc[1]) + Vector3(0, 0.03, 0), 0.8)
 		(b.material_override as StandardMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		evid.add_child(b)
+		strato(b, STRATO_BASE)
 
 func evidenzia_cielo(celle: Array, col: Color) -> void:
 	for cc in celle:
 		var b := _box(Vector3(1.35, 0.04, 1.2), Color(col.r, col.g, col.b, 0.3), pos_cielo(cc[0], cc[1]) + Vector3(0, 0.03, 0), 0.8)
 		(b.material_override as StandardMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		evid.add_child(b)
+		strato(b, STRATO_CIELO)
 
 func esplosione(pos: Vector3, col := Color(1.0, 0.55, 0.1)) -> void:
 	var p := CPUParticles3D.new()
@@ -464,6 +493,7 @@ func esplosione(pos: Vector3, col := Color(1.0, 0.55, 0.1)) -> void:
 	p.mesh = sm
 	p.position = pos + Vector3(0, 0.4, 0)
 	add_child(p)
+	strato(p, _strato_z(pos.z))
 	p.emitting = true
 	get_tree().create_timer(1.5).timeout.connect(p.queue_free)
 
@@ -471,6 +501,7 @@ func lampo_citta() -> void:
 	var b := _box(Vector3(LARGO, 0.05, ALTO_CITTA), Color(1, 0.1, 0.2, 0.6), Vector3(0, 0.08, z_citta + ALTO_CITTA / 2), 2.0)
 	(b.material_override as StandardMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	add_child(b)
+	strato(b, STRATO_CIELO)
 	var tw := create_tween()
 	tw.tween_property(b, "scale", Vector3(1, 1, 1.05), 0.5)
 	tw.tween_callback(b.queue_free)
