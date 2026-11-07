@@ -37,6 +37,7 @@ var spost := {"cielo": Vector3.ZERO, "base": Vector3.ZERO}
 var lbl_stato: RichTextLabel
 var lbl_info: Label
 var lbl_hover: Label
+const SUGG_VUOTO := "Passa il mouse su uno spazio del cielo o del laboratorio per sapere cosa succede."
 var log_box: RichTextLabel
 var vassoio: HBoxContainer
 var box_azioni: HBoxContainer
@@ -815,13 +816,6 @@ func schermo_gioco() -> void:
 	sv_base.add_child(cam_base)
 	cont_base.gui_input.connect(func(e): _input_vista(e, "base", cont_base))
 	cont_base.resized.connect(func(): _inquadra.call_deferred(false))
-	lbl_hover = _lbl("", 16, C_TESTO)
-	lbl_hover.add_theme_color_override("font_outline_color", Color.BLACK)
-	lbl_hover.add_theme_constant_override("outline_size", 6)
-	lbl_hover.position = Vector2(12, 8)
-	lbl_hover.size = Vector2(900, 30)
-	lbl_hover.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	zona_base.add_child(lbl_hover)
 	var basso := PanelContainer.new()
 	basso.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	basso.size_flags_stretch_ratio = 1.0
@@ -831,6 +825,21 @@ func schermo_gioco() -> void:
 	basso.add_child(vb)
 	lbl_info = _lbl("", 18, C_ORO, font_grassetto)
 	vb.add_child(lbl_info)
+	# riquadro dei suggerimenti: cosa succede nello spazio sotto il mouse
+	var box_sugg := PanelContainer.new()
+	box_sugg.add_theme_stylebox_override("panel", _stile(Color(0.02, 0.1, 0.16, 0.95), C_CIANO, 6, 2))
+	var vsg := VBoxContainer.new()
+	vsg.add_theme_constant_override("separation", 2)
+	box_sugg.add_child(vsg)
+	vsg.add_child(_lbl("SUGGERIMENTO", 14, C_CIANO, font_grassetto))
+	lbl_hover = Label.new()
+	lbl_hover.add_theme_font_size_override("font_size", 18)
+	lbl_hover.add_theme_color_override("font_color", Color.WHITE)
+	lbl_hover.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	lbl_hover.custom_minimum_size = Vector2(200, 48)
+	lbl_hover.text = SUGG_VUOTO
+	vsg.add_child(lbl_hover)
+	vb.add_child(box_sugg)
 	vassoio = HBoxContainer.new()
 	vassoio.add_theme_constant_override("separation", 10)
 	vassoio.custom_minimum_size = Vector2(0, 74)
@@ -949,7 +958,7 @@ func _hover(cella: Dictionary, quale: String) -> void:
 			var n := m.nave_in(r, c)
 			if not n.is_empty():
 				t = "Nave %s · %s" % [n["col"], t]
-	lbl_hover.text = t
+	lbl_hover.text = t if t != "" else SUGG_VUOTO
 
 ## Cosa produrrà un dado piazzato in questa cella: utile, scavo, dubbia (forse inutile) o inutile.
 func _valuta_cella(id: int, r: int, c: int) -> Dictionary:

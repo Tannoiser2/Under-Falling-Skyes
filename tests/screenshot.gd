@@ -31,6 +31,7 @@ func _process(_d: float) -> bool:
 			main.m.piazza(mv[0], mv[1], mv[2])
 		main.dado_sel = main.m.dadi_in_mano()[0]["id"]
 		main.aggiorna(false)
+	if n == 48: main._hover({"zona": "base", "r": 1, "c": 2}, "base")
 	if n == 50: _scatta("piazzati")
 	if n == 52:
 		var ia := IA.new(main.m)
