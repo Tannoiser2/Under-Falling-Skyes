@@ -1,0 +1,3560 @@
+{
+ "basi": {
+  "A_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -3
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    }
+   ],
+   "rock": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "esc": [
+    2,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 2,
+   "danni": 3
+  },
+  "B_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    }
+   ],
+   "rock": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "esc": [
+    1,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 3,
+   "danni": 2
+  },
+  "C_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 3,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    }
+   ],
+   "rock": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     0
+    ]
+   ],
+   "esc": [
+    1,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 2,
+   "danni": 3
+  },
+  "D_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       3
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "robot",
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 4,
+     "mod": -2
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    }
+   ],
+   "rock": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "esc": [
+    2,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 1,
+   "danni": 2
+  },
+  "E_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 3,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       2,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    }
+   ],
+   "rock": [
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "esc": [
+    1,
+    3
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 3,
+   "danni": 3
+  },
+  "F_su": {
+   "rooms": [
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": -2
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    }
+   ],
+   "rock": [
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "esc": [
+    2,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 3,
+   "danni": 3
+  },
+  "G_su": {
+   "rooms": [
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "aa"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -2
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    }
+   ],
+   "rock": [
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "esc": [
+    2,
+    4
+   ],
+   "energia": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "start": 1,
+   "danni": 2
+  },
+  "A_giu": {
+   "rooms": [
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 4,
+     "mod": 3
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    }
+   ],
+   "rock": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "danni": 2
+  },
+  "B_giu": {
+   "rooms": [
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    }
+   ],
+   "rock": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7
+   ],
+   "danni": 3
+  },
+  "C_giu": {
+   "rooms": [
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 5,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       3
+      ]
+     ],
+     "cost": 2,
+     "mod": 2
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 3
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    }
+   ],
+   "rock": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "danni": 3
+  },
+  "D_giu": {
+   "rooms": [
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia",
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -4
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 2,
+     "mod": 2
+    },
+    {
+     "t": [
+      "ricerca",
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 3,
+     "mod": 1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    }
+   ],
+   "rock": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7
+   ],
+   "danni": 2
+  },
+  "E_giu": {
+   "rooms": [
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": -1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cost": 1,
+     "mod": 1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 1,
+     "mod": 1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca",
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 4,
+     "mod": 1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    }
+   ],
+   "rock": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "danni": 2
+  },
+  "F_giu": {
+   "rooms": [
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "energia",
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": -3
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 3,
+     "mod": -1
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       2,
+       1
+      ]
+     ],
+     "cost": 0,
+     "mod": 1
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 3
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": 1
+    }
+   ],
+   "rock": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6
+   ],
+   "danni": 2
+  },
+  "G_giu": {
+   "rooms": [
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "caccia"
+     ],
+     "cells": [
+      [
+       0,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       0,
+       3
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       4
+      ]
+     ],
+     "cost": 0,
+     "mod": -1
+    },
+    {
+     "t": [
+      "ricerca"
+     ],
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ]
+     ],
+     "cost": 2,
+     "mod": 2
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cost": 1,
+     "mod": 0
+    },
+    {
+     "t": [
+      "energia"
+     ],
+     "cells": [
+      [
+       1,
+       2
+      ]
+     ],
+     "cost": 0,
+     "mod": 0
+    },
+    {
+     "t": [
+      "robot"
+     ],
+     "cells": [
+      [
+       2,
+       2
+      ]
+     ],
+     "cost": 2,
+     "mod": 1
+    },
+    {
+     "t": [
+      "comando"
+     ],
+     "cells": [
+      [
+       2,
+       3
+      ]
+     ],
+     "cost": 1,
+     "mod": 1
+    }
+   ],
+   "rock": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "energia": [
+    5,
+    6,
+    7
+   ],
+   "danni": 3
+  }
+ },
+ "cielo": {
+  "1": [
+   {
+    "img": "cielo_1_a",
+    "ricerca": [
+     11,
+     3,
+     1,
+     5
+    ],
+    "righe": [
+     [
+      "",
+      "",
+      "",
+      ">",
+      ""
+     ],
+     [
+      "",
+      "<",
+      ">",
+      "",
+      ""
+     ],
+     [
+      "M",
+      "",
+      "E1",
+      "",
+      ""
+     ],
+     [
+      "E2",
+      "",
+      "<",
+      "",
+      "E4"
+     ]
+    ],
+    "azioni": [
+     "W1",
+     "X-2",
+     "W1",
+     ""
+    ],
+    "stelle": 0
+   },
+   {
+    "img": "cielo_1_b",
+    "ricerca": [
+     12,
+     1,
+     5,
+     3
+    ],
+    "righe": [
+     [
+      "",
+      "E1",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "<",
+      ">",
+      ""
+     ],
+     [
+      ">",
+      "",
+      "",
+      "",
+      "E2"
+     ],
+     [
+      "",
+      "<",
+      "E3",
+      "M",
+      ""
+     ]
+    ],
+    "azioni": [
+     "X-1",
+     "W2",
+     "X-2",
+     "D"
+    ],
+    "stelle": 1
+   }
+  ],
+  "2": [
+   {
+    "img": "cielo_2_a",
+    "ricerca": [
+     3,
+     1,
+     6,
+     1
+    ],
+    "righe": [
+     [
+      "M",
+      ">",
+      "",
+      "E4",
+      ""
+     ],
+     [
+      "",
+      "M",
+      "",
+      "",
+      ""
+     ],
+     [
+      "E4",
+      "E3",
+      "",
+      "<",
+      "E2"
+     ],
+     [
+      ">",
+      "",
+      "E6",
+      "",
+      "<"
+     ]
+    ],
+    "azioni": [
+     "W1",
+     "X-1",
+     "S-1",
+     ""
+    ],
+    "stelle": 0
+   },
+   {
+    "img": "cielo_2_b",
+    "ricerca": [
+     2,
+     4,
+     3,
+     2
+    ],
+    "righe": [
+     [
+      ">",
+      "",
+      "E2",
+      "",
+      "<"
+     ],
+     [
+      "M",
+      "M",
+      "",
+      "<",
+      "E3"
+     ],
+     [
+      "E4",
+      ">",
+      "",
+      "E5",
+      ""
+     ],
+     [
+      "",
+      "<",
+      ">",
+      "",
+      "M"
+     ]
+    ],
+    "azioni": [
+     "X-3",
+     "S-2",
+     "W2",
+     "S-1"
+    ],
+    "stelle": 1
+   }
+  ],
+  "3": [
+   {
+    "img": "cielo_3_a",
+    "ricerca": [
+     2,
+     3,
+     1,
+     4
+    ],
+    "righe": [
+     [
+      "",
+      "",
+      "E4",
+      ">",
+      ""
+     ],
+     [
+      "E5",
+      "",
+      "<",
+      "",
+      ""
+     ],
+     [
+      "",
+      "M",
+      ">",
+      "",
+      "E6"
+     ],
+     [
+      "M",
+      "E3",
+      "",
+      "E4",
+      "M"
+     ]
+    ],
+    "azioni": [
+     "S-1",
+     "W1",
+     "",
+     "K"
+    ],
+    "stelle": 0
+   },
+   {
+    "img": "cielo_3_b",
+    "ricerca": [
+     7,
+     3,
+     1,
+     3
+    ],
+    "righe": [
+     [
+      "E6",
+      "",
+      "<",
+      "",
+      "M"
+     ],
+     [
+      "M",
+      "E4",
+      "E7",
+      ">",
+      ""
+     ],
+     [
+      "",
+      ">",
+      "",
+      "M",
+      "E7"
+     ],
+     [
+      "",
+      "",
+      "M",
+      "E4",
+      ""
+     ]
+    ],
+    "azioni": [
+     "D",
+     "",
+     "K",
+     ""
+    ],
+    "stelle": 1
+   }
+  ],
+  "4": [
+   {
+    "img": "cielo_4_a",
+    "ricerca": [
+     1,
+     3,
+     1,
+     3
+    ],
+    "righe": [
+     [
+      "E3",
+      ">",
+      "",
+      "M",
+      ""
+     ],
+     [
+      "",
+      "E6",
+      "",
+      "<",
+      "E4"
+     ],
+     [
+      ">",
+      "",
+      "E3",
+      "",
+      "<"
+     ],
+     [
+      "",
+      "E5",
+      "M",
+      "E4",
+      ""
+     ]
+    ],
+    "azioni": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "stelle": 0
+   },
+   {
+    "img": "cielo_4_b",
+    "ricerca": [
+     5,
+     1,
+     2,
+     3
+    ],
+    "righe": [
+     [
+      "M",
+      "E5",
+      "M",
+      "",
+      "<"
+     ],
+     [
+      "",
+      "",
+      "E4",
+      "M",
+      "E5"
+     ],
+     [
+      "E4",
+      "M",
+      "",
+      "E6",
+      "M"
+     ],
+     [
+      "M",
+      "E7",
+      "M",
+      "M",
+      ""
+     ]
+    ],
+    "azioni": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "stelle": 1
+   }
+  ],
+  "c2": [
+   {
+    "img": "cielo_c2_a",
+    "ricerca": [
+     3,
+     4,
+     4,
+     3
+    ],
+    "righe": [
+     [
+      "E4",
+      "",
+      "E3",
+      ">",
+      ""
+     ],
+     [
+      "",
+      "<",
+      "M",
+      "E5",
+      "E6"
+     ],
+     [
+      "M",
+      "E5",
+      ">",
+      "",
+      "M"
+     ],
+     [
+      "V",
+      "V",
+      "V",
+      "V",
+      "V"
+     ]
+    ],
+    "azioni": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "stelle": 1
+   },
+   {
+    "img": "cielo_c2_b",
+    "ricerca": [
+     6,
+     5,
+     3,
+     3
+    ],
+    "righe": [
+     [
+      "",
+      "<",
+      "E4",
+      ">",
+      ""
+     ],
+     [
+      "E6",
+      "M",
+      "",
+      "E6",
+      "E5"
+     ],
+     [
+      "V",
+      "V",
+      "V",
+      "V",
+      "V"
+     ],
+     [
+      "V",
+      "V",
+      "V",
+      "V",
+      "V"
+     ]
+    ],
+    "azioni": [
+     "",
+     "",
+     "",
+     ""
+    ],
+    "stelle": 2
+   }
+  ],
+  "c3a": [
+   {
+    "img": "cielo_c3a_a",
+    "ricerca": [
+     10,
+     10,
+     1,
+     3
+    ],
+    "righe": [
+     [
+      "E1",
+      "",
+      "",
+      "M",
+      ""
+     ],
+     [
+      "",
+      "M",
+      "Pp",
+      "",
+      "E2"
+     ],
+     [
+      "Pc",
+      "",
+      "E4",
+      "",
+      "M"
+     ],
+     [
+      "M",
+      "E5",
+      "Pc",
+      "E6",
+      "Pp"
+     ]
+    ],
+    "azioni": [
+     "G2",
+     "X-1",
+     "G1",
+     "X-3"
+    ],
+    "stelle": 1
+   },
+   {
+    "img": "cielo_c3a_b",
+    "ricerca": [
+     12,
+     5,
+     4,
+     9
+    ],
+    "righe": [
+     [
+      "",
+      "<",
+      "M",
+      "E2",
+      ""
+     ],
+     [
+      "M",
+      "",
+      "",
+      "<",
+      "E3"
+     ],
+     [
+      "E1",
+      "Pp",
+      "Pc",
+      ">",
+      ""
+     ],
+     [
+      "Pc",
+      "M",
+      "E6",
+      "M",
+      "Pp"
+     ]
+    ],
+    "azioni": [
+     "W2",
+     "X-3",
+     "G3",
+     "S-1"
+    ],
+    "stelle": 2
+   }
+  ],
+  "c3b": [
+   {
+    "img": "cielo_c3b_a",
+    "ricerca": [
+     7,
+     1,
+     2,
+     5
+    ],
+    "righe": [
+     [
+      "M",
+      "Pp",
+      "",
+      "<",
+      "E3"
+     ],
+     [
+      "Pc",
+      ">",
+      "",
+      ">",
+      ""
+     ],
+     [
+      "",
+      "E6",
+      "M",
+      "Pp",
+      "M"
+     ],
+     [
+      "E5",
+      "",
+      "<",
+      "E4",
+      "Pc"
+     ]
+    ],
+    "azioni": [
+     "G2",
+     "W2",
+     "S-1",
+     "G1"
+    ],
+    "stelle": 1
+   },
+   {
+    "img": "cielo_c3b_b",
+    "ricerca": [
+     3,
+     6,
+     6,
+     3
+    ],
+    "righe": [
+     [
+      "Pp",
+      "",
+      "E3",
+      "",
+      ""
+     ],
+     [
+      "M",
+      ">",
+      "",
+      "Pc",
+      "M"
+     ],
+     [
+      "E5",
+      "Pp",
+      "M",
+      "E4",
+      "Pc"
+     ],
+     [
+      "",
+      "E7",
+      "",
+      "<",
+      "E5"
+     ]
+    ],
+    "azioni": [
+     "W2",
+     "G3",
+     "X-3",
+     "D"
+    ],
+    "stelle": 2
+   }
+  ],
+  "c4": [
+   {
+    "img": "cielo_c4_a",
+    "ricerca": [
+     5,
+     2,
+     6,
+     3
+    ],
+    "righe": [
+     [
+      "",
+      "M",
+      "X2",
+      "Pp",
+      ""
+     ],
+     [
+      "Pp",
+      "",
+      "<",
+      "M",
+      "X4"
+     ],
+     [
+      "M",
+      "X3",
+      ">",
+      "",
+      "M"
+     ],
+     [
+      "X6",
+      "Pc",
+      "M",
+      "X5",
+      "Pc"
+     ]
+    ],
+    "azioni": [
+     "G1",
+     "X-1",
+     "D",
+     "K"
+    ],
+    "stelle": 1
+   },
+   {
+    "img": "cielo_c4_b",
+    "ricerca": [
+     6,
+     3,
+     3,
+     5
+    ],
+    "righe": [
+     [
+      "",
+      "<",
+      "X5",
+      "X4",
+      "M"
+     ],
+     [
+      "M",
+      "X3",
+      "Pc",
+      "M",
+      "Pp"
+     ],
+     [
+      "M",
+      "Pc",
+      "M",
+      "M",
+      "X6"
+     ],
+     [
+      "X7",
+      "M",
+      "Pp",
+      ">",
+      ""
+     ]
+    ],
+    "azioni": [
+     "S-1",
+     "G2",
+     "K",
+     ""
+    ],
+    "stelle": 2
+   }
+  ]
+ },
+ "satellite": {
+  "img": "satellite",
+  "ricerca": [
+   6,
+   3
+  ],
+  "righe": [
+   [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   [
+    ">",
+    "",
+    "",
+    "",
+    "<"
+   ]
+  ],
+  "azioni": [
+   "G2",
+   "X-3"
+  ]
+ },
+ "citta": [
+  {
+   "id": "roswell",
+   "nome": "Roswell",
+   "cap": 0,
+   "num": 0,
+   "num_d": 0,
+   "su": "A",
+   "giu": "B",
+   "testo": "Nessuna abilità speciale.",
+   "testo_d": "Quando Roswell subisce il suo primo punto danno, avanza di 1 spazio sul tracciato ricerca."
+  },
+  {
+   "id": "newyork",
+   "nome": "New York",
+   "cap": 0,
+   "num": 2,
+   "num_d": 3,
+   "su": "C",
+   "giu": "A",
+   "testo": "Per la durata della battaglia, puoi usare soltanto un robot, ma il valore della sua stanza è aumentato di 1.",
+   "testo_d": "Il valore di una stanza è aumentato di 1 per ogni robot al suo interno."
+  },
+  {
+   "id": "washington",
+   "nome": "Washington, DC",
+   "cap": 0,
+   "num": 6,
+   "num_d": 6,
+   "su": "B",
+   "giu": "C",
+   "testo": "Nel lancio dei dadi ad inizio turno, imposta il valore di un dado bianco su 6 invece di tirarlo.",
+   "testo_d": "Immediatamente dopo il lancio dei dadi ad inizio turno, puoi impostare il valore di un dado lavoratore su 6."
+  },
+  {
+   "id": "montreal",
+   "nome": "Montreal",
+   "cap": 1,
+   "num": 3,
+   "num_d": 3,
+   "su": "C",
+   "giu": "D",
+   "testo": "Due o più effetti stanza dello stesso tipo possono essere risolti simultaneamente. Somma i loro valori, poi esegui un unico effetto con il valore del risultato.",
+   "testo_d": "Due o più effetti stanza dello stesso tipo possono essere risolti simultaneamente. Somma i loro valori, poi esegui un unico effetto con il valore del risultato aumentato di 1."
+  },
+  {
+   "id": "rio",
+   "nome": "Rio de Janeiro",
+   "cap": 1,
+   "num": 4,
+   "num_d": 4,
+   "su": "D",
+   "giu": "A",
+   "testo": "All'inizio della Fase delle Stanze, puoi far tornare sulla nave madre la nave che si trova più in basso. In caso di parità, scegli tu quale.",
+   "testo_d": "All'inizio della Fase delle Stanze, escludendo tutte le navi sugli spazi esplosione, puoi far tornare sulla nave madre la nave che si trova più in basso. In caso di parità, scegli tu quale."
+  },
+  {
+   "id": "avana",
+   "nome": "L'Avana",
+   "cap": 1,
+   "num": 2,
+   "num_d": 4,
+   "su": "A",
+   "giu": "D",
+   "testo": "Quando rimuovi un dado lavoratore senza effetto, puoi assemblare sullo spazio un robot esaurito con lo stesso valore. Ogni volta che usi un dado robot, rimuovilo.",
+   "testo_d": "Quando rimuovi un dado lavoratore senza effetto, puoi assemblare sullo spazio un robot esaurito con lo stesso valore +1. Ogni volta che usi un dado robot, rimuovilo."
+  },
+  {
+   "id": "messico",
+   "nome": "Città del Messico",
+   "cap": 1,
+   "num": 3,
+   "num_d": 3,
+   "su": "D",
+   "giu": "C",
+   "testo": "Quando piazzi un dado per far avanzare l'escavatore di 4 spazi o meno, avanzalo immediatamente. Non ti costa alcuna energia. Lascia il dado sotto l'escavatore fino alla Fase delle Stanze.",
+   "testo_d": "Quando piazzi un dado per far avanzare l'escavatore di 5 spazi o meno, avanzalo immediatamente. Non ti costa alcuna energia. Lascia il dado sotto l'escavatore fino alla Fase delle Stanze."
+  },
+  {
+   "id": "parigi",
+   "nome": "Parigi",
+   "cap": 2,
+   "num": 4,
+   "num_d": 4,
+   "su": "F",
+   "giu": "E",
+   "testo": "Ogni volta che assembli un robot, puoi aumentare il valore di un dado lavoratore piazzato di 1.",
+   "testo_d": "Ogni volta che assembli un robot, puoi aumentare il valore di un dado lavoratore piazzato o di un altro robot già assemblato di 1."
+  },
+  {
+   "id": "johannesburg",
+   "nome": "Johannesburg",
+   "cap": 2,
+   "num": 4,
+   "num_d": 4,
+   "su": "E",
+   "giu": "D",
+   "testo": "Il dado piazzato per avanzare l'escavatore non conta per il limite di massimo un dado per colonna.",
+   "testo_d": "Il dado piazzato per avanzare l'escavatore non conta per il limite di massimo un dado per colonna e fa avanzare l'escavatore di 1 spazio extra."
+  },
+  {
+   "id": "londra",
+   "nome": "Londra",
+   "cap": 2,
+   "num": 2,
+   "num_d": 3,
+   "su": "B",
+   "giu": "E",
+   "testo": "Quando usi un effetto dei caccia, puoi anche distruggere 1 nave su uno spazio esplosione con un numero più alto di 1 rispetto al normale.",
+   "testo_d": "Quando usi un effetto dei caccia, puoi anche distruggere 1 nave su uno spazio esplosione con un numero più alto di 1, 2 o 3 rispetto al normale."
+  },
+  {
+   "id": "mosca",
+   "nome": "Mosca",
+   "cap": 2,
+   "num": 3,
+   "num_d": 4,
+   "su": "E",
+   "giu": "F",
+   "testo": "L'effetto della stanza comando è risolto con un bonus +1.",
+   "testo_d": "L'effetto della stanza comando è risolto con un bonus +2."
+  },
+  {
+   "id": "cairo",
+   "nome": "Il Cairo",
+   "cap": 2,
+   "num": 3,
+   "num_d": 3,
+   "su": "D",
+   "giu": "F",
+   "testo": "All'inizio di ogni Fase delle Stanze puoi trasferire un dado lavoratore da una stanza con cannone antiaereo su una stanza differente della stessa colonna.",
+   "testo_d": "Una volta per Fase delle Stanze puoi trasferire un dado lavoratore su una stanza differente della stessa colonna."
+  },
+  {
+   "id": "seul",
+   "nome": "Seul",
+   "cap": 3,
+   "num": 2,
+   "num_d": 3,
+   "su": "G",
+   "giu": "B",
+   "testo": "I robot di valore 2 o meno non decrescono dopo l'uso.",
+   "testo_d": "I robot di valore 3 o meno non decrescono dopo l'uso."
+  },
+  {
+   "id": "tokyo",
+   "nome": "Tokyo",
+   "cap": 3,
+   "num": 4,
+   "num_d": 5,
+   "su": "E",
+   "giu": "G",
+   "testo": "Puoi avere un solo robot. Quando lo assembli non inizia esaurito.",
+   "testo_d": "I tuoi robot non iniziano esauriti quando vengono assemblati."
+  },
+  {
+   "id": "sydney",
+   "nome": "Sydney",
+   "cap": 3,
+   "num": 3,
+   "num_d": 3,
+   "su": "B",
+   "giu": "G",
+   "testo": "Una volta per Fase delle Stanze puoi trasferire un dado lavoratore di valore 3 o meno, portandolo su uno spazio ricerca.",
+   "testo_d": "Una volta per Fase delle Stanze puoi trasferire un dado lavoratore, portandolo su uno spazio ricerca."
+  },
+  {
+   "id": "pechino",
+   "nome": "Pechino",
+   "cap": 3,
+   "num": 3,
+   "num_d": 4,
+   "su": "F",
+   "giu": "G",
+   "testo": "Non lanciare uno dei dadi grigi. Quando lo piazzi imposta il suo valore in modo che uguagli quello di un dado grigio già piazzato.",
+   "testo_d": "Non lanciare uno dei dadi grigi. Quando lo piazzi imposta il suo valore in modo che uguagli quello di un dado lavoratore già piazzato."
+  },
+  {
+   "id": "singapore",
+   "nome": "Singapore",
+   "cap": 3,
+   "num": 3,
+   "num_d": 3,
+   "su": "G",
+   "giu": "F",
+   "testo": "All'inizio di ogni turno, puoi trasferire ogni robot installato.",
+   "testo_d": "Ogni robot non esaurito può essere trasferito in qualsiasi momento."
+  }
+ ],
+ "personaggi": [
+  {
+   "id": "moss",
+   "nome": "Jackson Moss",
+   "cap": 1,
+   "ruolo": "Colonnello",
+   "testo": "Aumenta due dadi lavoratore, piazzati o meno, di 1 ciascuno.",
+   "ruolo_p": "Generale",
+   "testo_p": "Aumenta i tuoi dadi lavoratori, piazzati o meno, fino ad un massimo di 3 punti complessivi, distribuiti come preferisci."
+  },
+  {
+   "id": "harper",
+   "nome": "Clinton Harper",
+   "cap": 1,
+   "ruolo": "Pilota",
+   "testo": "Abbatti 1 nave nemica su uno spazio esplosione.",
+   "ruolo_p": "Asso",
+   "testo_p": "Abbatti 1 nave nemica su uno spazio qualsiasi."
+  },
+  {
+   "id": "legrand",
+   "nome": "Samantha Legrand",
+   "cap": 1,
+   "ruolo": "Reporter",
+   "testo": "Avanza di uno spazio sul tracciato ricerca, fintanto che il suo valore è 3 o meno.",
+   "ruolo_p": "Giornalista",
+   "testo_p": "Avanza sul tracciato ricerca di un numero di spazi che abbiano un valore complessivo di 6 o meno."
+  },
+  {
+   "id": "ortego",
+   "nome": "Lucía Ortego",
+   "cap": 1,
+   "ruolo": "Meccanico",
+   "testo": "Aumenta un robot di 1 o rendi non esaurito un robot esaurito.",
+   "ruolo_p": "Tecnico",
+   "testo_p": "Aumenta un robot di 2 oppure entrambi i robot di 1 oppure rendi tutti i robot assemblati non esauriti."
+  },
+  {
+   "id": "aumann",
+   "nome": "Shanti Aumann",
+   "cap": 2,
+   "ruolo": "Politica",
+   "testo": "Imposta un dado lavoratore non ancora piazzato su un valore qualsiasi.",
+   "ruolo_p": "Ministero della Difesa",
+   "testo_p": "Imposta fino a 3 dadi lavoratore non ancora piazzati su valori qualsiasi."
+  },
+  {
+   "id": "almasi",
+   "nome": "Karima Almasi",
+   "cap": 2,
+   "ruolo": "Dirigente",
+   "testo": "Durante la Fase delle Stanze, trasferisci un dado lavoratore su un differente spazio dello stesso tipo.",
+   "ruolo_p": "Direttore Risorse Umane",
+   "testo_p": "Durante la Fase delle Stanze, trasferisci fino a due dadi lavoratore su due spazi differenti."
+  },
+  {
+   "id": "ruzicka",
+   "nome": "Jaroslav Růžička",
+   "cap": 2,
+   "ruolo": "Programmatore",
+   "testo": "Scegli un tipo di effetto stanza. Nella Fase delle Stanze di questo turno, gli effetti delle stanze del tipo scelto sono risolti con valore +1.",
+   "ruolo_p": "Ingegnere Informatico",
+   "testo_p": "Nella Fase delle Stanze di questo turno, tutti gli effetti delle stanze sono risolti con valore +1."
+  },
+  {
+   "id": "bernstein",
+   "nome": "Pieter Bernstein",
+   "cap": 2,
+   "ruolo": "Ingegnere",
+   "testo": "Durante la Fase delle Stanze, ricevi 1 energia e puoi avanzare l'escavatore di 2 spazi al costo di 0 energia purché in questo turno tu non muova l'escavatore altrimenti.",
+   "ruolo_p": "Capo Ingegnere",
+   "testo_p": "Durante la Fase delle Stanze, ricevi 2 energia e puoi avanzare l'escavatore di 4 spazi al costo di 0 energia purché in questo turno tu non muova l'escavatore altrimenti."
+  },
+  {
+   "id": "wanglin",
+   "nome": "Wang Lin",
+   "cap": 3,
+   "ruolo": "Scienziato",
+   "testo": "Prendi un dado lavoratore usato in un effetto dei caccia, dagli il valore del numero di navi abbattute e trasferiscilo su uno spazio ricerca.",
+   "ruolo_p": "Capo Ricercatore",
+   "testo_p": "Risolvi un effetto dei caccia con un bonus +3. Prendi un dado lavoratore usato per questo effetto, dagli il valore del numero di navi abbattute e trasferiscilo su uno spazio ricerca."
+  },
+  {
+   "id": "izox",
+   "nome": "Iz'ox",
+   "cap": 3,
+   "ruolo": "Alieno",
+   "testo": "Quando le navi vengono sganciate, scegline una e questa non sarà sganciata fino al prossimo turno.",
+   "ruolo_p": "Capo della Resistenza",
+   "testo_p": "Prendi una nave da un punto di sgancio e piazzala di fianco alla riga che si trova 2 posizioni più sotto. È temporaneamente fuori gioco. Quando la nave madre discende su quella riga, falla tornare su di essa."
+  },
+  {
+   "id": "jang",
+   "nome": "Jang Chanwook",
+   "cap": 3,
+   "ruolo": "Giocatore",
+   "testo": "Muovi una singola nave di 1 passo verso l'alto o verso il basso su uno spazio non già occupato senza innescare l'effetto di tale spazio.",
+   "ruolo_p": "Torneista",
+   "testo_p": "Muovi fino a due navi di 1 passo e in una stessa direzione di tua scelta (sopra, sotto, sinistra o destra), su spazi non già occupati del cielo, senza innescare l'effetto di tali spazi."
+  },
+  {
+   "id": "bell",
+   "nome": "Archie Bell",
+   "cap": 3,
+   "ruolo": "Fondatore Bell Robotics",
+   "testo": "Assembla un robot non esaurito di valore 3.",
+   "ruolo_p": "AD Bell Robotics",
+   "testo_p": "Assembla un robot non esaurito di valore 4."
+  }
+ ],
+ "scenari": [
+  {
+   "id": "rinforzi",
+   "nome": "Rinforzi",
+   "cap": 1,
+   "intro": "Le forze di difesa di questa città sono a ranghi ridotti. Dobbiamo resistere: i rinforzi stanno arrivando.",
+   "prep": "Mescola tutti e sei i segnalini numerati e piazzali coperti in una pila in cima ad uno dei tuoi dadi grigi.",
+   "regole": "Il dado sotto la pila non viene né tirato, né piazzato. Invece, all'inizio di ogni turno, rivela e scarta il segnalino in cima alla pila.\nDopo aver piazzato gli altri quattro dadi lavoratore, tutte le navi nella colonna priva del dado lavoratore discenderanno di un numero di passi pari al valore del segnalino scartato in questo turno. Innesca gli effetti come se si fossero mosse per il piazzamento di un dado.\nI segnalini saranno tutti scartati dopo 6 turni. I rinforzi sono arrivati! Da quel momento in poi, lancia e piazza tutti e 5 i dadi, come avviene in condizioni normali."
+  },
+  {
+   "id": "satelliti",
+   "nome": "Satelliti",
+   "cap": 1,
+   "intro": "La nostra squadra sta raccogliendo dati importanti tramite alcuni satelliti chiave. Se non siamo in grado di proteggerli, non riusciremo a completare le nostre ricerche.",
+   "prep": "Mescola i segnalini numerati da 1 a 5 e pescane uno a caso per ogni colonna. Piazza ogni segnalino nella colonna assegnata ad una quota da 1 a 5 spazi sopra la città, a seconda del numero mostrato. Questi segnalini rappresentano i satelliti. Piazza il segnalino col 6, coperto, sullo spazio più basso del tracciato ricerca della tessera cielo più bassa.",
+   "regole": "Quando ricerchi, ignora (superandolo) lo spazio coperto.\nOgni volta che una nave discende sopra o attraverso uno spazio con un satellite, rimuovi il segnalino dal gioco e fai scendere il segnalino ricerca di 1 spazio. Se c'è un effetto sotto il segnalino, la discesa della nave non lo innesca."
+  },
+  {
+   "id": "evacuazione",
+   "nome": "Evacuazione",
+   "cap": 1,
+   "intro": "L'invasione aliena ha scatenato il panico collettivo. Invece di guadagnare i rifugi i civili stanno fuggendo per le strade. Se non li evacuiamo in sicurezza, potremmo perdere la città.",
+   "prep": "Prendi i segnalini numerati da 1 a 6, mescolali e piazza un segnalino casuale scoperto sulla tessera città a rappresentare un civile che deve essere salvato. Piazza i restanti segnalini coperti a righe alterne accanto alle tessere cielo, a partire dall'alto.",
+   "regole": "Ogni volta che la nave madre discende su una riga con un segnalino, piazza quest'ultimo scoperto sulla tessera città.\nQuando piazzi un dado lavoratore su una stanza con un cannone antiaereo, se il dado corrisponde a quello di un segnalino nella città, rimuovi il segnalino prima di avanzare le navi nemiche. Hai salvato quei civili.\nQuando una nave colpisce la città, scarta tutti i segnalini su di essa. Hai fallito nel salvare quei civili. Subisci un danno extra per ogni segnalino scartato."
+  },
+  {
+   "id": "battaglia",
+   "nome": "Battaglia per i cieli",
+   "cap": 1,
+   "intro": "Per qualche ragione, il nemico ha deciso di colpire questa città più duramente.",
+   "prep": "Piazza la nave arancione e una nave bianca sulla nave madre, in modo che siano sganciate alla fine del primo turno.",
+   "regole": "La nave arancione segue le regole ordinarie delle navi viola. In pratica, dovrai affrontare 6 navi ordinarie in questo scenario."
+  },
+  {
+   "id": "pericolosa",
+   "nome": "Ricerca pericolosa",
+   "cap": 2,
+   "intro": "Crediamo di poter raccogliere delle importanti informazioni da questo campione alieno, ma dobbiamo procedere con cautela.",
+   "prep": "Nessun cambiamento nella preparazione.",
+   "regole": "Ogni volta che avanzi sul tracciato ricerca, la tua base subisce 1 danno se fai più di un passo.\nLa penalità vale se avanzi di più spazi con un singolo effetto di ricerca; è ancora possibile usare più effetti di ricerca, avanzando di uno spazio per ciascuno ed evitando così la penalità. Puoi scegliere di avanzare di 1 spazio anche qualora il valore sia sufficiente a permetterti più passi.\nPerdi se la tua città è distrutta, anche qualora l'ultimo punto danno fosse dovuto all'avanzamento sullo spazio alla sommità del tracciato ricerca."
+  },
+  {
+   "id": "reattore",
+   "nome": "Perdita nel reattore",
+   "cap": 2,
+   "intro": "Il bombardamento nemico ha danneggiato il nostro reattore. È ancora utilizzabile... ma a quale prezzo?",
+   "prep": "Piazza i sei segnalini accanto al tracciato energia coperti (i numeri non hanno importanza).",
+   "regole": "Se aumenti la tua energia in qualsiasi momento nel corso del tuo turno, piazza un segnalino sul tracciato danno della città alla fine di quel turno. Parti piazzando un segnalino sul teschio e in seguito colloca di volta in volta il segnalino successivo sullo spazio subito sopra quello precedentemente occupato. Aggiungi solo un segnalino per turno.\nTuttavia, se completi un turno nel quale non aumenti l'energia, rimuovi il segnalino più in alto dal tracciato.\nSe il segnalino danno dovesse raggiungere lo stesso spazio o uno più basso di quello occupato dal segnalino più alto, perdi."
+  },
+  {
+   "id": "riparazione",
+   "nome": "Riparazione della base",
+   "cap": 2,
+   "intro": "Un attacco precedente alla nostra base ci ha portato ad un passo dalla distruzione. Se non ripariamo i danni rapidamente, potremmo non sopravvivere all'attacco imminente.",
+   "prep": "Il segnalino danno parte 4 spazi più in basso rispetto al normale. Prendi i segnalini numerati da 3 a 6 e piazzali vicino alla tua base (i segnalini 1 e 2 non saranno usati).",
+   "regole": "Un dado lavoratore su un cunicolo scavato può essere usato per riparare la base. Quando risolvi quel dado, piazza un segnalino di valore uguale o inferiore sullo spazio cunicolo, quindi sposta il segnalino danno di 1 passo verso l'alto.\nGli spazi cunicolo con dei segnalini non possono essere riusati per questo effetto di riparazione per il resto della partita."
+  },
+  {
+   "id": "ammiraglia",
+   "nome": "Nave ammiraglia",
+   "cap": 2,
+   "intro": "Una delle navi che attacca questa città sembra avere una connessione unica con la nave madre.",
+   "prep": "Invece di 5 navi viola, schiera 4 navi viola e la nave arancione. Piazza la nave arancione su un punto di sgancio casuale e piazza le navi viola sugli altri quattro.",
+   "regole": "In ogni turno, dopo aver risolto l'azione della nave madre (e prima dello sgancio), risolvi anche l'azione della nave madre corrispondente alla riga su cui si trova la nave arancione.\nSe la nave arancione si trova su un punto di sgancio oppure sulla nave madre, non risolvere alcun effetto ulteriore. Se si trova su una riga priva dell'azione della nave madre o con il teschio, discende di 2 spazi (senza innescare gli effetti su questi spazi).\nDurante lo sgancio, la nave arancione viene sganciata per prima. Per ogni altra regola conta come una nave viola."
+  },
+  {
+   "id": "contaminazione",
+   "nome": "Contaminazione",
+   "cap": 3,
+   "intro": "Questo composto chimico è più difficile da isolare di quanto pensassimo. Sta penetrando attraverso tutta la base.",
+   "prep": "Prendi i segnalini numerati da 1 a 6 e impilali scoperti in ordine crescente, con l'1 in cima.",
+   "regole": "All'inizio di ogni turno, dopo che hai piazzato il tuo primo dado lavoratore, prendi il segnalino più in alto dalla pila e collocalo sotto il dado, scoperto. Questo spazio è ora contaminato. Se la pila è vuota, rimuovi il segnalino di valore minore scoperto dal tabellone e collocalo, coperto, sul nuovo spazio appena contaminato.\nQuando piazzi un dado su uno spazio che è già contaminato la tua base subisce 1 danno."
+  },
+  {
+   "id": "tempesta",
+   "nome": "Tempesta",
+   "cap": 3,
+   "intro": "Il nemico sta usando qualche sorta di tecnologia per il controllo del tempo atmosferico per mettere fuori uso i radar e confondere i nostri piloti.",
+   "prep": "Usa 5 segnalini coperti (qualsiasi). In ogni colonna, copri l'esplosione di valore più basso.",
+   "regole": "Non puoi usare gli spazi esplosione coperti dai segnalini. Trattali come spazi senza simboli.\nQuando un nemico attraversa o muove via da uno spazio con un segnalino, rimuovi il segnalino e piazzalo sulla nave madre.\nOgni volta che una nave è abbattuta, sposta sul relativo spazio esplosione il segnalino presente su quella colonna. Se la colonna non aveva più un segnalino, prendilo invece dalla nave madre. Quando abbatti più navi in contemporanea dalla stessa colonna, puoi scegliere al posto di quale mettere il segnalino."
+  },
+  {
+   "id": "kamikaze",
+   "nome": "Navi kamikaze",
+   "cap": 3,
+   "intro": "Sembra che un particolare segnale alieno stia trasformando le navi nemiche in spietati bolidi suicidi.",
+   "prep": "Invece di 5 navi viola, schiera 4 navi viola e la nave arancione. Piazza la nave arancione su un punto di sgancio casuale e piazza le navi viola sugli altri quattro.",
+   "regole": "Ogni volta che la nave arancione colpisce la città, infligge 2 danni invece che 1 soltanto.\nLa nave arancione viene sganciata prima di tutte le altre navi. Quando viene sganciata, invece di piazzarla su un punto di sgancio, scambiala con la nave viola più bassa. Se più navi viola sono alla pari per bassa quota, scegli tu una di esse. La nave viola sostituita viene collocata sulla nave madre per essere subito sganciata nuovamente.\nSe tutte le navi viola si trovano sulla nave madre o su un punto di sgancio quando la nave arancione viene sganciata, collocatela invece su un punto di sgancio secondo le normali regole."
+  },
+  {
+   "id": "sabotatore",
+   "nome": "Sabotatore",
+   "cap": 3,
+   "intro": "Un sabotatore si cela in città. Possiamo solo indovinare la sua posizione. Bisogna aspettarsi il peggio.",
+   "prep": "Prendi i segnalini numerati da 1 a 5, mescolali e impilali coperti.",
+   "regole": "Alla fine della Fase dei Dadi, rivela il segnalino in cima alla pila e scartalo. Il numero indica quale colonna è stata sabotata in questo turno.\nSe la colonna in questione ha un dado lavoratore in una stanza con un cannone antiaereo, tutte le navi in quella colonna discendono immediatamente di 1 spazio. Non innescano effetti in questo modo, ma possono danneggiare la città.\nI dadi lavoratore nella colonna sabotata non possono essere aumentati in alcun modo, né trasferiti. Quando risolvi gli effetti delle stanze, tratta i dadi lavoratori nella colonna sabotata come avessero un valore di 1 inferiore.\nUn dado escavatore nella colonna sabotata fa avanzare l'escavatore del numero di passi usuali, se il dado eccede tale valore, oppure di uno spazio in meno, se il valore del dado coincide con quello dei passi.\nAlla fine turno, se è rimasto solo un segnalino nella pila, mescola i 5 segnalini per creare una nuova pila."
+  },
+  {
+   "id": "finale",
+   "nome": "La Battaglia Finale",
+   "cap": 4,
+   "intro": "Le nostre ricerche mostrano che gli alieni sono in realtà i burattini di un'intelligenza artificiale che li controlla dall'orbita. Dobbiamo distruggere il satellite dell'IA.",
+   "prep": "Piazza il satellite alieno in cima alle tessere cielo. Inizia con due file di navi. Schiera le 4 navi bianche e la nave arancione sui 5 punti di sgancio del satellite. Schiera le 5 navi viola sui 5 punti di sgancio usuali.",
+   "regole": "Considera la nave arancione come un'altra nave bianca.\nÈ vero che la tessera del satellite allunga la discesa della nave madre, ma aumenta anche l'altezza del tuo tracciato ricerca. Quando raggiungi la sommità del tracciato, distruggi il satellite, liberi gli alieni, salvi il pianeta e vinci la campagna."
+  }
+ ]
+}
