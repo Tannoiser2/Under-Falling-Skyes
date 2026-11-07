@@ -518,10 +518,14 @@ func piazza(id: int, r: int, c: int, pechino: int = 0) -> bool:
 	if finita():
 		return true
 	if d["col"] == "bianco":
+		var nuovi: Array = []
 		for x in s["dadi"]:
 			if x["st"] == "mano" and not x.get("fisso", false):
 				x["v"] = _d6()
-		eventi.append({"t": "tiro"})
+				nuovi.append(str(x["v"]))
+		if not nuovi.is_empty():
+			_log("Dado bianco piazzato: rilancio dei dadi rimasti, escono %s." % ", ".join(nuovi))
+			eventi.append({"t": "tiro"})
 	if dadi_in_mano().is_empty():
 		_fine_dadi()
 	return true
@@ -913,6 +917,10 @@ func _effetto_stanza(t: String, v: int, opz: Dictionary, usati: Array) -> void:
 			var p := _passi_ricerca(v)
 			if opz.has("passi"):
 				p = clamp(int(opz["passi"]), 0, p)
+			if p == 0:
+				var i: int = s["ricerca"]
+				if i + 1 < s["traccia"].size():
+					_log("Ricerca: valore %d insufficiente, il prossimo spazio costa %d." % [v, s["traccia"][i + 1]["v"]])
 			_avanza_ricerca(p)
 		"caccia":
 			_caccia(v, opz)

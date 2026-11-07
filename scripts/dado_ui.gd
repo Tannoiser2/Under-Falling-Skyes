@@ -14,7 +14,7 @@ var _sopra := false
 const COL := {"grigio": Color(0.55, 0.56, 0.6), "bianco": Color(0.95, 0.95, 0.93), "blu": Color(0.12, 0.42, 0.9)}
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(66, 66)
+	custom_minimum_size = Vector2(66, 66 + (14 if colore == "bianco" else 0))
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_entered.connect(func(): _sopra = true; queue_redraw())
 	mouse_exited.connect(func(): _sopra = false; queue_redraw())
@@ -28,7 +28,10 @@ func _gui_input(e: InputEvent) -> void:
 		premuto.emit()
 
 func _draw() -> void:
-	var r := Rect2(Vector2(5, 5), size - Vector2(10, 10))
+	var r := Rect2(Vector2(5, 5), Vector2(size.x - 10, size.x - 10))
+	if colore == "bianco" and not bloccato:
+		var f := get_theme_default_font()
+		draw_string(f, Vector2(0, size.y - 2), "RILANCIA", HORIZONTAL_ALIGNMENT_CENTER, size.x, 11, Color(0.95, 0.85, 0.4))
 	if scelto:
 		draw_rect(r.grow(5), Color(0.9, 0.12, 0.42), true)
 	elif _sopra and not bloccato:

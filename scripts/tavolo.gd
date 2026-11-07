@@ -103,6 +103,18 @@ func _cilindro(r: float, h: float, col: Color, emiss := 0.0) -> MeshInstance3D:
 	mi.material_override = mat
 	return mi
 
+## Segnalino dei tracciati: anello scuro, disco bianco luminoso e centro colorato, ben visibile
+## anche sopra i cerchi colorati delle tessere.
+func _segnalino(col: Color) -> Node3D:
+	var n := Node3D.new()
+	var a := _cilindro(0.5, 0.2, Color(0.02, 0.02, 0.05))
+	n.add_child(a)
+	var b := _cilindro(0.4, 0.26, Color(1, 1, 1), 1.2)
+	n.add_child(b)
+	var c := _cilindro(0.22, 0.32, col, 1.5)
+	n.add_child(c)
+	return n
+
 func _etichetta(testo: String, dim := 64, col := Color.WHITE) -> Label3D:
 	var l := Label3D.new()
 	l.text = testo
@@ -224,13 +236,13 @@ func costruisci(motore: Motore) -> void:
 	nodo_madre.position = Vector3(0, 0.03, z_madre() - MADRE_H / 2)
 	strato(nodo_madre, STRATO_CIELO)
 	# segnalini dei tracciati
-	segn_ricerca = _cilindro(0.3, 0.18, Color(0.35, 0.95, 0.3), 0.6)
+	segn_ricerca = _segnalino(Color(0.2, 1.0, 0.35))
 	add_child(segn_ricerca)
 	strato(segn_ricerca, STRATO_CIELO)
-	segn_energia = _cilindro(0.3, 0.18, Color(1.0, 0.85, 0.1), 0.6)
+	segn_energia = _segnalino(Color(1.0, 0.8, 0.0))
 	add_child(segn_energia)
 	strato(segn_energia, STRATO_BASE)
-	segn_danni = _box(Vector3(0.5, 0.2, 0.5), Color(0.95, 0.15, 0.3), Vector3.ZERO, 0.5)
+	segn_danni = _segnalino(Color(1.0, 0.1, 0.3))
 	add_child(segn_danni)
 	strato(segn_danni, STRATO_BASE)
 	nodo_esc = load("res://assets/modelli/escavatore.glb").instantiate()

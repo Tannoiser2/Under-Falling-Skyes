@@ -789,10 +789,12 @@ func schermo_gioco() -> void:
 	cam_cielo.cull_mask = Tavolo.STRATO_CIELO
 	sv_cielo.add_child(cam_cielo)
 	cont_cielo.gui_input.connect(func(e): _input_vista(e, "cielo", cont_cielo))
+	cont_cielo.resized.connect(func(): _inquadra.call_deferred(false))
 	# --- colonna destra
 	var des := VBoxContainer.new()
 	des.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	des.size_flags_stretch_ratio = 1.0
+	des.custom_minimum_size = Vector2(0, 0)
 	des.add_theme_constant_override("separation", 0)
 	radice.add_child(des)
 	var zona_base := Control.new()
@@ -812,6 +814,7 @@ func schermo_gioco() -> void:
 	cam_base.cull_mask = Tavolo.STRATO_BASE
 	sv_base.add_child(cam_base)
 	cont_base.gui_input.connect(func(e): _input_vista(e, "base", cont_base))
+	cont_base.resized.connect(func(): _inquadra.call_deferred(false))
 	lbl_hover = _lbl("", 16, C_TESTO)
 	lbl_hover.add_theme_color_override("font_outline_color", Color.BLACK)
 	lbl_hover.add_theme_constant_override("outline_size", 6)
@@ -861,10 +864,14 @@ func _imposta_cam(cam: Camera3D, box: AABB, vp: Vector2i, z: float, sp: Vector3,
 	var dim: float = max(box.size.z, box.size.x / asp) * 1.02 / z
 	var cen := box.get_center() + sp
 	var xf := Transform3D(Basis.from_euler(Vector3(-PI / 2, 0, 0)), Vector3(cen.x, 60.0, cen.z))
+	var vecchio = cam.get_meta("tween", null)
+	if vecchio is Tween and (vecchio as Tween).is_valid():
+		(vecchio as Tween).kill()
 	if anim:
 		var tw := create_tween().set_parallel()
 		tw.tween_property(cam, "global_transform", xf, 0.4)
 		tw.tween_property(cam, "size", dim, 0.4)
+		cam.set_meta("tween", tw)
 	else:
 		cam.global_transform = xf
 		cam.size = dim
@@ -915,6 +922,10 @@ func _hover(cella: Dictionary, quale: String) -> void:
 	if lbl_hover == null or m == null:
 		return
 	var t := ""
+	if cella.get("zona", "") == "base" and m.s["fase"] == "dadi" and dado_sel >= 0:
+		var perche := m.perche_no(dado_sel, cella["r"], cella["c"])
+		lbl_hover.text = perche if perche != "" else _valuta_cella(dado_sel, cella["r"], cella["c"])["testo"]
+		return
 	if cella.get("zona", "") == "base":
 		var r: int = cella["r"]
 		var c: int = cella["c"]
@@ -939,6 +950,65 @@ func _hover(cella: Dictionary, quale: String) -> void:
 			if not n.is_empty():
 				t = "Nave %s · %s" % [n["col"], t]
 	lbl_hover.text = t
+
+## Cosa produrrà un dado piazzato in questa cella: utile, scavo, dubbia (forse inutile) o inutile.
+func _valuta_cella(id: int, r: int, c: int) -> Dictionary:
+	var d := m.dado(id)
+	var v: int = int(d.get("v", 1))
+	if d.get("fisso", false) and not m.valori_pechino().is_empty():
+		v = m.valori_pechino().max()
+	var passi := v
+	if not m.scavata(r, c):
+		return {"tipo": "scavo", "testo": "Scavo: nella Fase delle Stanze, pagando 1 energia, l'escavatore avanza fin qui."
+			+ ("" if int(m.s["energia"]) >= 1 else " Ora non hai energia: serve prima una stanza energetica.")}
+	var i := m.stanza_di(r, c)
+	if m.e_aa(r, c):
+		passi = max(0, v - 1)
+	var navi := 0
+	for n in m.navi_cielo():
+		if n["c"] == c:
+			navi += 1
+	var mov := "le navi della colonna scendono di %d" % passi if navi > 0 else "nessuna nave in questa colonna"
+	if i < 0:
+		if m.scen() == "riparazione":
+			return {"tipo": "dubbia", "testo": "Cunicolo: può riparare la base (scenario Riparazione); %s." % mov}
+		return {"tipo": "inutile", "testo": "Cunicolo di collegamento: il dado non avrà alcun effetto nella Fase delle Stanze, serve solo a muovere le navi (%s)." % mov}
+	var st: Dictionary = m.s["stanze"][i]
+	if "aa" in st["t"]:
+		return {"tipo": "utile", "testo": "Cannone antiaereo: nessun effetto nelle stanze, ma le navi scendono di 1 in meno (%s)." % mov}
+	# stanza su più spazi: ci sono abbastanza dadi per riempirla?
+	var vuote := 0
+	for cc in st["celle"]:
+		if (cc[0] != r or cc[1] != c) and m.cella_libera(cc[0], cc[1]):
+			vuote += 1
+	var rimasti := m.dadi_in_mano().size() - 1
+	if vuote > 0:
+		var colonne := {}
+		for cc in st["celle"]:
+			if (cc[0] != r or cc[1] != c) and m.cella_libera(cc[0], cc[1]):
+				colonne[cc[1]] = true
+		var bloccata := false
+		for col in colonne:
+			if int(col) == c or m.colonna_ha_lavoratore(int(col)):
+				bloccata = true
+		if rimasti < vuote or bloccata:
+			return {"tipo": "inutile", "testo": "Stanza su %d spazi: non riuscirai a riempirla in questo turno, quindi il dado non avrà effetto (%s)." % [st["celle"].size(), mov]}
+		return {"tipo": "dubbia", "testo": "Stanza su %d spazi: funziona solo se riempi anche gli altri %d (%s)." % [st["celle"].size(), vuote, mov]}
+	var costo: int = int(st["costo"])
+	var testo := _desc_stanza(i)
+	if costo > int(m.s["energia"]) and not "energia" in st["t"]:
+		return {"tipo": "dubbia", "testo": "%s: costa %d energia e ne hai %d, servirà prima una stanza energetica (%s)." % [testo, costo, m.s["energia"], mov]}
+	if "ricerca" in st["t"]:
+		var val := v + int(st["mod"])
+		if m.passi_ricerca(val) == 0:
+			return {"tipo": "inutile", "testo": "Ricerca di valore %d: non basta per il prossimo spazio del tracciato (costa %d) (%s)." % [val, m.s["traccia"][int(m.s["ricerca"]) + 1]["v"] if int(m.s["ricerca"]) + 1 < m.s["traccia"].size() else 0, mov]}
+	if "caccia" in st["t"] and st["t"].size() == 1:
+		var val2 := v + int(st["mod"])
+		if m.bersagli_caccia(val2, false).is_empty() and m.bersagli_caccia(val2, true).is_empty():
+			return {"tipo": "dubbia", "testo": "Caccia di valore %d: ora nessuna nave è su un'esplosione abbastanza bassa (%s)." % [val2, mov]}
+	if "energia" in st["t"] and int(m.s["energia"]) >= int(m.s["energia_max"]):
+		return {"tipo": "dubbia", "testo": "Energetica: il tracciato energia è già al massimo (%s)." % mov}
+	return {"tipo": "utile", "testo": "%s (%s)." % [testo, mov]}
 
 func _desc_stanza(i: int) -> String:
 	var st: Dictionary = m.s["stanze"][i]
@@ -1068,9 +1138,12 @@ func _vassoio() -> void:
 		ch.queue_free()
 	if m.s["fase"] != "dadi":
 		return
+	var ha_bianchi := false
 	for d in m.s["dadi"]:
 		if d["st"] != "mano" and d["st"] != "bloccato":
 			continue
+		if d["col"] == "bianco":
+			ha_bianchi = true
 		var b := DadoUI.new()
 		b.valore = int(d["v"])
 		b.colore = d["col"]
@@ -1080,7 +1153,17 @@ func _vassoio() -> void:
 		var id: int = d["id"]
 		if not b.bloccato:
 			b.premuto.connect(func(): _scegli_dado(id))
+		if d["col"] == "bianco" and not b.bloccato:
+			b.tooltip_text = "Dado bianco: dopo averlo piazzato rilanci tutti i dadi non ancora piazzati."
+		elif not b.bloccato and not b.fisso:
+			b.tooltip_text = "Dado grigio: piazzandolo gli altri dadi non cambiano."
 		vassoio.add_child(b)
+	var nota := _lbl("Grigi: non cambiano gli altri.\nBianchi: piazzandone uno rilanci tutti i dadi rimasti." if ha_bianchi else "Grigi: gli altri dadi non cambiano.", 14, C_TENUE)
+	nota.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	nota.custom_minimum_size = Vector2(200, 0)
+	nota.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	nota.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	vassoio.add_child(nota)
 
 func _scegli_dado(id: int) -> void:
 	if not selezione.is_empty() and selezione.get("tipo", "") == "dado":
@@ -1101,8 +1184,10 @@ func _info() -> void:
 		"dadi":
 			if dado_sel < 0:
 				lbl_info.text = "Scegli un dado e poi uno spazio della base. Ogni dado va in una colonna diversa."
+			elif m.dado(dado_sel).get("col", "") == "bianco" and m.dadi_in_mano().size() > 1:
+				lbl_info.text = "Dado BIANCO: dopo averlo piazzato rilanci i dadi rimasti. Azzurro utile, arancione scavo, giallo forse inutile, grigio nessun effetto."
 			else:
-				lbl_info.text = "Clicca uno spazio evidenziato della base per piazzare il dado."
+				lbl_info.text = "Azzurro: utile · arancione: scavo · giallo: forse inutile · grigio: nessun effetto."
 		"stanze":
 			lbl_info.text = "Clicca un dado sulla base per risolverlo, poi termina la fase."
 		_:
@@ -1194,7 +1279,13 @@ func _evidenze() -> void:
 			tav.evidenzia_cielo(sc, C_MAGENTA)
 		return
 	if m.s["fase"] == "dadi" and dado_sel >= 0:
-		tav.evidenzia_base(m.celle_legali(dado_sel), C_CIANO)
+		var gruppi := {"utile": [], "scavo": [], "dubbia": [], "inutile": []}
+		for cc in m.celle_legali(dado_sel):
+			gruppi[_valuta_cella(dado_sel, cc[0], cc[1])["tipo"]].append(cc)
+		tav.evidenzia_base(gruppi["utile"], C_CIANO)
+		tav.evidenzia_base(gruppi["scavo"], Color(1.0, 0.55, 0.1))
+		tav.evidenzia_base(gruppi["dubbia"], Color(1.0, 0.9, 0.2))
+		tav.evidenzia_base(gruppi["inutile"], Color(0.45, 0.45, 0.5))
 	elif m.s["fase"] == "stanze":
 		var cc: Array = []
 		for d in m.s["dadi"]:
@@ -1254,6 +1345,11 @@ func _click_cella(cella: Dictionary, gpos: Vector2) -> void:
 				menu_p.add_item("Pechino: valore %d" % v)
 			menu_p.id_pressed.connect(func(k): _piazza(id, r, c, m.valori_pechino()[k]))
 			menu_p.popup()
+			return
+		var val := _valuta_cella(id, r, c)
+		if val["tipo"] == "inutile":
+			_finestra("Dado senza effetto", _lbl(val["testo"] + "\n\nVuoi piazzarlo comunque?", 18), [
+				["Piazza comunque", func(): _piazza(id, r, c, 0)], ["Scegli un altro spazio", func(): pass]])
 			return
 		_piazza(id, r, c, 0)
 	elif m.s["fase"] == "stanze":
