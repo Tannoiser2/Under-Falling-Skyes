@@ -824,6 +824,9 @@ func schermo_gioco() -> void:
 	vb.add_theme_constant_override("separation", 6)
 	basso.add_child(vb)
 	lbl_info = _lbl("", 18, C_ORO, font_grassetto)
+	# va a capo: un messaggio lungo non deve allargare la colonna e schiacciare il cielo
+	lbl_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	lbl_info.custom_minimum_size = Vector2(100, 0)
 	vb.add_child(lbl_info)
 	# riquadro dei suggerimenti: cosa succede nello spazio sotto il mouse
 	var box_sugg := PanelContainer.new()
@@ -894,8 +897,63 @@ func _raggio(e: InputEvent, cam: Camera3D, cont: Control) -> Vector3:
 	var t := -o.y / n.y
 	return o + n * t
 
+var tocchi := {}
+var _dist_pizzico := 0.0
+var _tocco_mosso := false
+
+## Tocco su iPad: un dito sposta la vista (un tocco senza trascinare vale come clic),
+## due dita pizzicate fanno lo zoom.
+func _tocco(e: InputEvent, quale: String, cont: Control) -> bool:
+	if e is InputEventScreenTouch:
+		if e.pressed:
+			tocchi[e.index] = e.position
+			_tocco_mosso = false
+			if tocchi.size() == 2:
+				var p: Array = tocchi.values()
+				_dist_pizzico = (p[0] as Vector2).distance_to(p[1])
+		else:
+			tocchi.erase(e.index)
+		return true
+	if e is InputEventScreenDrag:
+		tocchi[e.index] = e.position
+		var cam_q: Camera3D = cam_cielo if quale == "cielo" else cam_base
+		if tocchi.size() >= 2:
+			var p: Array = tocchi.values()
+			var d := (p[0] as Vector2).distance_to(p[1])
+			if _dist_pizzico > 10.0 and d > 10.0:
+				zoom[quale] = clamp(zoom[quale] * d / _dist_pizzico, 0.6, 4.0)
+			_dist_pizzico = d
+			_tocco_mosso = true
+			_inquadra(false)
+		elif e.relative.length() > 2.0 or _tocco_mosso:
+			_tocco_mosso = true
+			var k: float = cam_q.size / max(1.0, cont.size.y)
+			spost[quale] += Vector3(-e.relative.x * k, 0, -e.relative.y * k)
+			_inquadra(false)
+		return true
+	if e is InputEventMagnifyGesture:
+		zoom[quale] = clamp(zoom[quale] * e.factor, 0.6, 4.0)
+		_inquadra(false)
+		return true
+	if e is InputEventPanGesture:
+		var cam_p: Camera3D = cam_cielo if quale == "cielo" else cam_base
+		var k2: float = cam_p.size / max(1.0, cont.size.y) * 8.0
+		spost[quale] += Vector3(e.delta.x * k2, 0, e.delta.y * k2)
+		_inquadra(false)
+		return true
+	return false
+
 func _input_vista(e: InputEvent, quale: String, cont: Control) -> void:
 	var cam := cam_cielo if quale == "cielo" else cam_base
+	if _tocco(e, quale, cont):
+		return
+	# il clic emulato da un dito che ha trascinato non deve piazzare dadi
+	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and _tocco_mosso:
+		if not e.pressed:
+			_tocco_mosso = false
+		return
+	if e is InputEventMouseMotion and not tocchi.is_empty():
+		return
 	if e is InputEventMouseButton:
 		if e.button_index == MOUSE_BUTTON_WHEEL_UP and e.pressed:
 			zoom[quale] = min(zoom[quale] * 1.12, 4.0)
@@ -1290,7 +1348,7 @@ func _info() -> void:
 			if dado_sel < 0:
 				lbl_info.text = "Scegli un dado e poi uno spazio della base. Ogni dado va in una colonna diversa."
 			elif m.dado(dado_sel).get("col", "") == "bianco" and m.dadi_in_mano().size() > 1:
-				lbl_info.text = "Dado BIANCO: dopo averlo piazzato rilanci i dadi rimasti. Azzurro utile, arancione scavo, giallo forse inutile, grigio nessun effetto."
+				lbl_info.text = "Dado BIANCO: dopo averlo piazzato rilanci i dadi rimasti."
 			else:
 				lbl_info.text = "Azzurro: utile · arancione: scavo · giallo: forse inutile · grigio: nessun effetto."
 		"stanze":

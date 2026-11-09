@@ -29,7 +29,9 @@ func _process(_d: float) -> bool:
 		for i in 3:
 			var mv := ia.mossa_dadi()
 			main.m.piazza(mv[0], mv[1], mv[2])
-		main.dado_sel = main.m.dadi_in_mano()[0]["id"]
+		for d in main.m.dadi_in_mano():
+			main.dado_sel = d["id"]
+			if d["col"] == "bianco": break
 		main.aggiorna(false)
 	if n == 46:
 		var best := []
